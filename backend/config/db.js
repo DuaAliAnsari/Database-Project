@@ -1,17 +1,43 @@
-const oracledb = require("oracledb");
-require("dotenv").config();
+const oracledb = require('oracledb');
+
+let pool;
 
 async function initialize() {
   try {
-    await oracledb.createPool({
+    pool = await oracledb.createPool({
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       connectString: process.env.DB_CONNECTION_STRING,
+      poolMin: 2,
+      poolMax: 10,
+      poolIncrement: 2
     });
-    console.log("Connected to OracleDB");
+    console.log('Oracle DB connection pool created successfully');
   } catch (err) {
-    console.error(err.message);
+    console.error('Error creating connection pool:', err);
+    throw err;
   }
 }
 
-module.exports = { initialize };
+async function getConnection() {
+  if (!pool) {
+    throw new Error('Pool not initialized. Call initialize() first.');
+  }
+  return await pool.getConnection();
+}
+
+async function close() {
+  if (pool) {
+    await pool.close();
+  }
+}
+
+module.exports = {
+  initialize,
+  getConnection,
+  close,
+  // Export config for backward compatibility (if needed)
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  connectString: process.env.DB_CONNECTION_STRING
+};

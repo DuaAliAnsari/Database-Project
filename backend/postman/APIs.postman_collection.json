@@ -1,249 +1,185 @@
 {
 	"info": {
 		"_postman_id": "1b27e766-075d-45f1-bb9a-0090ba93c99c",
-		"name": "APIs",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "11507061"
+		"name": "Hospital Management - Doctors API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "App Running Check",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJzaGVoemFkYXNsYW1vemFAZ21haWwuY29tIiwiaWF0IjoxNzI2NTEzOTA4LCJleHAiOjE3MjY1MTc1MDh9.t0g7JO-E8mQbGhpiB_idCxpDV6JpwUqSpp8An0o_6V",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3001",
-					"host": [
-						"localhost"
-					],
-					"port": "3001"
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "List All Employees",
+			"name": "1. Get All Doctors",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3001/api/employees",
+					"raw": "http://localhost:3001/api/doctors",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3001",
-					"path": [
-						"api",
-						"employees"
-					]
+					"path": ["api", "doctors"]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Add Employee",
+			"name": "2. Get Doctor By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/doctors/1",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "3001",
+					"path": ["api", "doctors", "1"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. Create Doctor",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"id\":800,\r\n  \"firstName\": \"Muhammad\",\r\n  \"lastName\": \"Shehzad\",\r\n  \"email\": \"shehzadaslamoza123@gmail.com\",\r\n  \"phone\": \"123-456-7890\",\r\n  \"hireDate\": \"2024-06-16T19:00:00.000Z\", \r\n  \"jobID\": \"IT_PROG\",\r\n  \"salary\": 60000,\r\n  \"commission_pct\": 0.1,\r\n  \"manager_id\": 101,\r\n  \"department_id\": 60\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n  \"doctor_id\": 4,\n  \"doctor_name\": \"Dr. Ahmed Ali\",\n  \"department\": \"Orthopedics\",\n  \"phone_number\": \"9234567890\",\n  \"email\": \"ahmed.ali@hospital.com\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:3001/api/employees",
+					"raw": "http://localhost:3001/api/doctors",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3001",
-					"path": [
-						"api",
-						"employees"
-					]
+					"path": ["api", "doctors"]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Update Employee",
+			"name": "4. Update Doctor",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"id\":600,\r\n  \"firstName\": \"123123\",\r\n  \"lastName\": \"123\",\r\n  \"email\": \"shehzagmail.com\",\r\n  \"phone\": \"123-456-7890\",\r\n  \"hireDate\": \"2024-06-16T19:00:00.000Z\", \r\n  \"jobID\": \"IT_PROG\",\r\n  \"salary\": 60000,\r\n  \"commission_pct\": 0.1,\r\n  \"manager_id\": 101,\r\n  \"department_id\": 60\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n  \"doctor_name\": \"Dr. Ahmed Ali Updated\",\n  \"department\": \"Orthopedics\",\n  \"phone_number\": \"9234567891\",\n  \"email\": \"ahmed.ali.updated@hospital.com\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:3001/api/employees/",
+					"raw": "http://localhost:3001/api/doctors/4",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3001",
-					"path": [
-						"api",
-						"employees",
-						""
-					]
+					"path": ["api", "doctors", "4"]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Delete Employee",
+			"name": "5. Delete Doctor",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3001/api/employees/300",
+					"raw": "http://localhost:3001/api/doctors/4",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3001",
-					"path": [
-						"api",
-						"employees",
-						"300"
-					]
+					"path": ["api", "doctors", "4"]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "List All departments",
+			"name": "6. Search Doctors By Name",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3001/api/department",
+					"raw": "http://localhost:3001/api/doctors/search?q=Arjun",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3001",
-					"path": [
-						"api",
-						"department"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update Department",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n   \"department_id\":300,\r\n  \"department_name\": \"LALALALA\",\r\n  \"manager_id\": 301,\r\n  \"location_id\": 1000\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
+					"path": ["api", "doctors", "search"],
+					"query": [
+						{
+							"key": "q",
+							"value": "Arjun"
 						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3001/api/department",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"api",
-						"department"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Add Department",
+			"name": "7. Get Doctors By Department",
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n   \"department_id\":400,\r\n  \"department_name\": \"HEHEHAHA\",\r\n  \"manager_id\": 300,\r\n  \"location_id\": 1000\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
+				"url": {
+					"raw": "http://localhost:3001/api/doctors/department/Cardiology",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "3001",
+					"path": ["api", "doctors", "department", "Cardiology"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8. Get Doctor Appointments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/doctors/1/appointments",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "3001",
+					"path": ["api", "doctors", "1", "appointments"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "9. Get Doctor Prescriptions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/doctors/1/prescriptions",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "3001",
+					"path": ["api", "doctors", "1", "prescriptions"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10. Get Doctor Schedule",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/doctors/1/schedule?date=2025-01-15",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "3001",
+					"path": ["api", "doctors", "1", "schedule"],
+					"query": [
+						{
+							"key": "date",
+							"value": "2025-01-15"
 						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3001/api/department",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"api",
-						"department"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "List All Locations",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3001/api/location",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"api",
-						"location"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "List All Jobs",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3001/api/jobs",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"api",
-						"jobs"
 					]
 				}
 			},
