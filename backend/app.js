@@ -4,8 +4,8 @@ const express = require("express");
 
 // Routes
 const doctorRoutes = require("./routes/doctorRoutes");
-const patientRoutes = require("./routes/patientRoutes");
-const appointmentRoutes = require("./routes/AppointmentRoutes");
+const patientRoutes = require("./routes/patientsRoutes");
+//const appointmentRoutes = require("./routes/AppointmentRoutes");
 
 const db = require("./config/db");
 const bodyParser = require("body-parser");
@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 app.use("/api/doctors", doctorRoutes);
 app.use("/api/patients", patientRoutes);
-app.use("/api/appointments", appointmentRoutes);
+//app.use("/api/appointments", appointmentRoutes);
 
 app.use("/", (req, res) => {
   res.json({ 

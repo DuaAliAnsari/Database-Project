@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const router = express.Router();
 const AppointmentController = require('../controllers/AppointmentController');
 
@@ -16,4 +16,4 @@ router.delete('/:id', AppointmentController.deleteAppointment);
 // Status update
 router.patch('/:id/status', AppointmentController.updateAppointmentStatus);
 
-module.exports = router;
+module.exports = router;*/

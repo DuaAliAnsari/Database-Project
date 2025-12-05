@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const PatientController = require('../controllers/PatientController');
+const PatientController = require('../controllers/patientsController');
 
 // Search (MUST come before /:id)
 router.get('/search', PatientController.searchPatients);
