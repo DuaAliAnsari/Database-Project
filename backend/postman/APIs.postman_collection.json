@@ -1,189 +1,463 @@
 {
-	"info": {
-		"_postman_id": "1b27e766-075d-45f1-bb9a-0090ba93c99c",
-		"name": "Hospital Management - Doctors API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "1. Get All Doctors",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3001/api/doctors",
-					"protocol": "http",
-					"host": ["localhost"],
-					"port": "3001",
-					"path": ["api", "doctors"]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "2. Get Doctor By ID",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3001/api/doctors/1",
-					"protocol": "http",
-					"host": ["localhost"],
-					"port": "3001",
-					"path": ["api", "doctors", "1"]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "3. Create Doctor",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"doctor_id\": 4,\n  \"doctor_name\": \"Dr. Ahmed Ali\",\n  \"department\": \"Orthopedics\",\n  \"phone_number\": \"9234567890\",\n  \"email\": \"ahmed.ali@hospital.com\"\n}"
-				},
-				"url": {
-					"raw": "http://localhost:3001/api/doctors",
-					"protocol": "http",
-					"host": ["localhost"],
-					"port": "3001",
-					"path": ["api", "doctors"]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "4. Update Doctor",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"doctor_name\": \"Dr. Ahmed Ali Updated\",\n  \"department\": \"Orthopedics\",\n  \"phone_number\": \"9234567891\",\n  \"email\": \"ahmed.ali.updated@hospital.com\"\n}"
-				},
-				"url": {
-					"raw": "http://localhost:3001/api/doctors/4",
-					"protocol": "http",
-					"host": ["localhost"],
-					"port": "3001",
-					"path": ["api", "doctors", "4"]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "5. Delete Doctor",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3001/api/doctors/4",
-					"protocol": "http",
-					"host": ["localhost"],
-					"port": "3001",
-					"path": ["api", "doctors", "4"]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "6. Search Doctors By Name",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3001/api/doctors/search?q=Arjun",
-					"protocol": "http",
-					"host": ["localhost"],
-					"port": "3001",
-					"path": ["api", "doctors", "search"],
-					"query": [
-						{
-							"key": "q",
-							"value": "Arjun"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "7. Get Doctors By Department",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3001/api/doctors/department/Cardiology",
-					"protocol": "http",
-					"host": ["localhost"],
-					"port": "3001",
-					"path": ["api", "doctors", "department", "Cardiology"]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "8. Get Doctor Appointments",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3001/api/doctors/1/appointments",
-					"protocol": "http",
-					"host": ["localhost"],
-					"port": "3001",
-					"path": ["api", "doctors", "1", "appointments"]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "9. Get Doctor Prescriptions",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3001/api/doctors/1/prescriptions",
-					"protocol": "http",
-					"host": ["localhost"],
-					"port": "3001",
-					"path": ["api", "doctors", "1", "prescriptions"]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "10. Get Doctor Schedule",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3001/api/doctors/1/schedule?date=2025-01-15",
-					"protocol": "http",
-					"host": ["localhost"],
-					"port": "3001",
-					"path": ["api", "doctors", "1", "schedule"],
-					"query": [
-						{
-							"key": "date",
-							"value": "2025-01-15"
-						}
-					]
-				}
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "hospital-mgmt-complete-api-v2",
+    "name": "Hospital Management - Complete API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Appointments",
+      "item": [
+        {
+          "name": "1. Get All Appointments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/appointments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "appointments"]
+            }
+          }
+        },
+        {
+          "name": "2. Get Appointment By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/appointments/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "appointments", "1"]
+            }
+          }
+        },
+        {
+          "name": "3. Create Appointment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointment_id\": 11,\n  \"patient_id\": 1,\n  \"doctor_id\": 2,\n  \"appointment_date\": \"2025-01-20\",\n  \"appointment_time\": \"14:30\",\n  \"status\": \"Scheduled\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/appointments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "appointments"]
+            }
+          }
+        },
+        {
+          "name": "4. Update Appointment",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patient_id\": 1,\n  \"doctor_id\": 2,\n  \"appointment_date\": \"2025-01-20\",\n  \"appointment_time\": \"15:00\",\n  \"status\": \"Completed\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/appointments/11",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "appointments", "11"]
+            }
+          }
+        },
+        {
+          "name": "5. Delete Appointment",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/appointments/11",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "appointments", "11"]
+            }
+          }
+        },
+        {
+          "name": "6. Get Appointments By Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/appointments/status/Scheduled",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "appointments", "status", "Scheduled"]
+            }
+          }
+        },
+        {
+          "name": "7. Get Appointments By Date",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/appointments/date/2024-12-05",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "appointments", "date", "2024-12-05"]
+            }
+          }
+        },
+        {
+          "name": "8. Get Upcoming Appointments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/appointments/upcoming",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "appointments", "upcoming"]
+            }
+          }
+        },
+        {
+          "name": "9. Update Appointment Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Completed\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/appointments/1/status",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "appointments", "1", "status"]
+            }
+          }
+        },
+        {
+          "name": "10. Get Appointments By Doctor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/appointments/doctor/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "appointments", "doctor", "1"]
+            }
+          }
+        },
+        {
+          "name": "11. Get Appointments By Patient",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/appointments/patient/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "appointments", "patient", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Patients",
+      "item": [
+        {
+          "name": "1. Get All Patients",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/patients",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "patients"]
+            }
+          }
+        },
+        {
+          "name": "2. Get Patient By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/patients/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "patients", "1"]
+            }
+          }
+        },
+        {
+          "name": "3. Create Patient",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patient_id\": 6,\n  \"patient_name\": \"Ali Hassan\",\n  \"phone_number\": \"03001234567\",\n  \"date_of_birth\": \"1990-05-15\",\n  \"gender\": \"Male\",\n  \"age\": 34\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/patients",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "patients"]
+            }
+          }
+        },
+        {
+          "name": "4. Update Patient",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patient_name\": \"Ali Hassan Updated\",\n  \"phone_number\": \"03001234568\",\n  \"date_of_birth\": \"1990-05-15\",\n  \"gender\": \"Male\",\n  \"age\": 35\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/patients/6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "patients", "6"]
+            }
+          }
+        },
+        {
+          "name": "5. Delete Patient",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/patients/6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "patients", "6"]
+            }
+          }
+        },
+        {
+          "name": "6. Search Patients By Name",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/patients/search?q=Ali",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "patients", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "Ali"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "7. Get Patient Appointments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/patients/1/appointments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "patients", "1", "appointments"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Doctors",
+      "item": [
+        {
+          "name": "1. Get All Doctors",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/doctors",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "doctors"]
+            }
+          }
+        },
+        {
+          "name": "2. Get Doctor By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/doctors/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "doctors", "1"]
+            }
+          }
+        },
+        {
+          "name": "3. Create Doctor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"doctor_id\": 6,\n  \"doctor_name\": \"Dr. Ahmed Ali\",\n  \"department\": \"Orthopedics\",\n  \"phone_number\": \"9234567890\",\n  \"email\": \"ahmed.ali@hospital.com\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/doctors",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "doctors"]
+            }
+          }
+        },
+        {
+          "name": "4. Update Doctor",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"doctor_name\": \"Dr. Ahmed Ali Updated\",\n  \"department\": \"Orthopedics\",\n  \"phone_number\": \"9234567891\",\n  \"email\": \"ahmed.ali.updated@hospital.com\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/doctors/6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "doctors", "6"]
+            }
+          }
+        },
+        {
+          "name": "5. Delete Doctor",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/doctors/6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "doctors", "6"]
+            }
+          }
+        },
+        {
+          "name": "6. Search Doctors By Name",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/doctors/search?q=John",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "doctors", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "John"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "7. Get Doctors By Department",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/doctors/department/Cardiology",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "doctors", "department", "Cardiology"]
+            }
+          }
+        },
+        {
+          "name": "8. Get Doctor Appointments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/doctors/1/appointments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "doctors", "1", "appointments"]
+            }
+          }
+        }
+      ]
+    }
+  ]
 }

@@ -14,20 +14,20 @@ class AppointmentModel {
     try {
       const result = await connection.execute(
         `SELECT 
-          a.appointment_id,
-          a.patient_id,
-          a.doctor_id,
-          a.appointment_time,
-          a.diagnosis,
-          a.symptoms,
-          a.status,
-          p.patient_name,
-          d.doctor_name,
-          d.department
-        FROM Appointment a
-        LEFT JOIN patient_id p ON a.patient_id = p.patient_id
-        LEFT JOIN Doctors d ON a.doctor_id = d.doctor_id
-        ORDER BY a.appointment_time DESC`
+          a.APPOINTMENT_ID,
+          a.PATIENT_ID,
+          a.DOCTOR_ID,
+          a.APPOINTMENT_DATE,
+          a.APPOINTMENT_TIME,
+          a.STATUS,
+          p.PATIENT_NAME,
+          p.PHONE_NUMBER,
+          d.DOCTOR_NAME,
+          d.DEPARTMENT
+        FROM APPOINTMENT a
+        LEFT JOIN PATIENTS p ON a.PATIENT_ID = p.PATIENT_ID
+        LEFT JOIN DOCTORS d ON a.DOCTOR_ID = d.DOCTOR_ID
+        ORDER BY a.APPOINTMENT_DATE DESC, a.APPOINTMENT_TIME DESC`
       );
       return result.rows;
     } catch (error) {
@@ -43,22 +43,25 @@ class AppointmentModel {
     try {
       const result = await connection.execute(
         `SELECT 
-          a.appointment_id,
-          a.patient_id,
-          a.doctor_id,
-          a.appointment_time,
-          a.diagnosis,
-          a.symptoms,
-          a.status,
-          p.patient_name,
-          p.phone_number,
-          d.doctor_name,
-          d.department,
-          d.email as doctor_email
-        FROM Appointment a
-        LEFT JOIN patient_id p ON a.patient_id = p.patient_id
-        LEFT JOIN Doctors d ON a.doctor_id = d.doctor_id
-        WHERE a.appointment_id = :appointmentId`,
+          a.APPOINTMENT_ID,
+          a.PATIENT_ID,
+          a.DOCTOR_ID,
+          a.APPOINTMENT_DATE,
+          a.APPOINTMENT_TIME,
+          a.STATUS,
+          p.PATIENT_NAME,
+          p.PHONE_NUMBER,
+          p.DATE_OF_BIRTH,
+          p.GENDER,
+          p.AGE,
+          d.DOCTOR_NAME,
+          d.DEPARTMENT,
+          d.PHONE_NUMBER as DOCTOR_PHONE,
+          d.EMAIL as DOCTOR_EMAIL
+        FROM APPOINTMENT a
+        LEFT JOIN PATIENTS p ON a.PATIENT_ID = p.PATIENT_ID
+        LEFT JOIN DOCTORS d ON a.DOCTOR_ID = d.DOCTOR_ID
+        WHERE a.APPOINTMENT_ID = :appointmentId`,
         [appointmentId]
       );
       return result.rows[0];
@@ -74,30 +77,27 @@ class AppointmentModel {
     const connection = await this.getConnection();
     try {
       const result = await connection.execute(
-        `INSERT INTO Appointment (
-          appointment_id,
-          patient_id,
-          doctor_id,
-          appointment_time,
-          diagnosis,
-          symptoms,
-          status
+        `INSERT INTO APPOINTMENT (
+          APPOINTMENT_ID,
+          PATIENT_ID,
+          DOCTOR_ID,
+          APPOINTMENT_DATE,
+          APPOINTMENT_TIME,
+          STATUS
         ) VALUES (
           :appointment_id,
           :patient_id,
           :doctor_id,
-          TO_DATE(:appointment_time, 'YYYY-MM-DD HH24:MI:SS'),
-          :diagnosis,
-          :symptoms,
+          TO_DATE(:appointment_date, 'YYYY-MM-DD'),
+          :appointment_time,
           :status
         )`,
         {
           appointment_id: appointmentData.appointment_id,
           patient_id: appointmentData.patient_id,
           doctor_id: appointmentData.doctor_id,
+          appointment_date: appointmentData.appointment_date,
           appointment_time: appointmentData.appointment_time,
-          diagnosis: appointmentData.diagnosis || null,
-          symptoms: appointmentData.symptoms || null,
           status: appointmentData.status || 'Scheduled'
         },
         { autoCommit: true }
@@ -115,22 +115,20 @@ class AppointmentModel {
     const connection = await this.getConnection();
     try {
       const result = await connection.execute(
-        `UPDATE Appointment 
+        `UPDATE APPOINTMENT 
         SET 
-          patient_id = :patient_id,
-          doctor_id = :doctor_id,
-          appointment_time = TO_DATE(:appointment_time, 'YYYY-MM-DD HH24:MI:SS'),
-          diagnosis = :diagnosis,
-          symptoms = :symptoms,
-          status = :status
-        WHERE appointment_id = :appointment_id`,
+          PATIENT_ID = :patient_id,
+          DOCTOR_ID = :doctor_id,
+          APPOINTMENT_DATE = TO_DATE(:appointment_date, 'YYYY-MM-DD'),
+          APPOINTMENT_TIME = :appointment_time,
+          STATUS = :status
+        WHERE APPOINTMENT_ID = :appointment_id`,
         {
           appointment_id: appointmentId,
           patient_id: appointmentData.patient_id,
           doctor_id: appointmentData.doctor_id,
+          appointment_date: appointmentData.appointment_date,
           appointment_time: appointmentData.appointment_time,
-          diagnosis: appointmentData.diagnosis,
-          symptoms: appointmentData.symptoms,
           status: appointmentData.status
         },
         { autoCommit: true }
@@ -148,7 +146,7 @@ class AppointmentModel {
     const connection = await this.getConnection();
     try {
       const result = await connection.execute(
-        `DELETE FROM Appointment WHERE appointment_id = :appointment_id`,
+        `DELETE FROM APPOINTMENT WHERE APPOINTMENT_ID = :appointment_id`,
         [appointmentId],
         { autoCommit: true }
       );
@@ -166,19 +164,19 @@ class AppointmentModel {
     try {
       const result = await connection.execute(
         `SELECT 
-          a.appointment_id,
-          a.appointment_time,
-          a.diagnosis,
-          a.symptoms,
-          a.status,
-          p.patient_name,
-          d.doctor_name,
-          d.department
-        FROM Appointment a
-        LEFT JOIN patient_id p ON a.patient_id = p.patient_id
-        LEFT JOIN Doctors d ON a.doctor_id = d.doctor_id
-        WHERE a.status = :status
-        ORDER BY a.appointment_time DESC`,
+          a.APPOINTMENT_ID,
+          a.APPOINTMENT_DATE,
+          a.APPOINTMENT_TIME,
+          a.STATUS,
+          p.PATIENT_NAME,
+          p.PHONE_NUMBER,
+          d.DOCTOR_NAME,
+          d.DEPARTMENT
+        FROM APPOINTMENT a
+        LEFT JOIN PATIENTS p ON a.PATIENT_ID = p.PATIENT_ID
+        LEFT JOIN DOCTORS d ON a.DOCTOR_ID = d.DOCTOR_ID
+        WHERE a.STATUS = :status
+        ORDER BY a.APPOINTMENT_DATE DESC, a.APPOINTMENT_TIME DESC`,
         [status]
       );
       return result.rows;
@@ -195,37 +193,20 @@ class AppointmentModel {
     try {
       const result = await connection.execute(
         `SELECT 
-          a.appointment_id,
-          a.appointment_time,
-          a.status,
-          p.patient_name,
-          d.doctor_name,
-          d.department
-        FROM Appointment a
-        LEFT JOIN patient_id p ON a.patient_id = p.patient_id
-        LEFT JOIN Doctors d ON a.doctor_id = d.doctor_id
-        WHERE TRUNC(a.appointment_time) = TRUNC(TO_DATE(:date, 'YYYY-MM-DD'))
-        ORDER BY a.appointment_time`,
+          a.APPOINTMENT_ID,
+          a.APPOINTMENT_DATE,
+          a.APPOINTMENT_TIME,
+          a.STATUS,
+          p.PATIENT_NAME,
+          p.PHONE_NUMBER,
+          d.DOCTOR_NAME,
+          d.DEPARTMENT
+        FROM APPOINTMENT a
+        LEFT JOIN PATIENTS p ON a.PATIENT_ID = p.PATIENT_ID
+        LEFT JOIN DOCTORS d ON a.DOCTOR_ID = d.DOCTOR_ID
+        WHERE TRUNC(a.APPOINTMENT_DATE) = TO_DATE(:date, 'YYYY-MM-DD')
+        ORDER BY a.APPOINTMENT_TIME`,
         [date]
-      );
-      return result.rows;
-    } catch (error) {
-      throw error;
-    } finally {
-      await connection.close();
-    }
-  }
-
-  // Get appointment's visit-specific records
-  async getAppointmentVisitRecords(appointmentId) {
-    const connection = await this.getConnection();
-    try {
-      const result = await connection.execute(
-        `SELECT 
-          vsr.*
-        FROM visit_specific_record vsr
-        WHERE vsr.appointment_id = :appointmentId`,
-        [appointmentId]
       );
       return result.rows;
     } catch (error) {
@@ -240,9 +221,9 @@ class AppointmentModel {
     const connection = await this.getConnection();
     try {
       const result = await connection.execute(
-        `UPDATE Appointment 
-        SET status = :status
-        WHERE appointment_id = :appointment_id`,
+        `UPDATE APPOINTMENT 
+        SET STATUS = :status
+        WHERE APPOINTMENT_ID = :appointment_id`,
         {
           appointment_id: appointmentId,
           status: status
@@ -263,19 +244,73 @@ class AppointmentModel {
     try {
       const result = await connection.execute(
         `SELECT 
-          a.appointment_id,
-          a.appointment_time,
-          a.status,
-          p.patient_name,
-          p.phone_number,
-          d.doctor_name,
-          d.department
-        FROM Appointment a
-        LEFT JOIN patient_id p ON a.patient_id = p.patient_id
-        LEFT JOIN Doctors d ON a.doctor_id = d.doctor_id
-        WHERE a.appointment_time > SYSDATE
-        AND a.status = 'Scheduled'
-        ORDER BY a.appointment_time ASC`
+          a.APPOINTMENT_ID,
+          a.APPOINTMENT_DATE,
+          a.APPOINTMENT_TIME,
+          a.STATUS,
+          p.PATIENT_NAME,
+          p.PHONE_NUMBER,
+          d.DOCTOR_NAME,
+          d.DEPARTMENT
+        FROM APPOINTMENT a
+        LEFT JOIN PATIENTS p ON a.PATIENT_ID = p.PATIENT_ID
+        LEFT JOIN DOCTORS d ON a.DOCTOR_ID = d.DOCTOR_ID
+        WHERE a.APPOINTMENT_DATE >= TRUNC(SYSDATE)
+        AND a.STATUS = 'Scheduled'
+        ORDER BY a.APPOINTMENT_DATE ASC, a.APPOINTMENT_TIME ASC`
+      );
+      return result.rows;
+    } catch (error) {
+      throw error;
+    } finally {
+      await connection.close();
+    }
+  }
+
+  // Get appointments by doctor
+  async getAppointmentsByDoctor(doctorId) {
+    const connection = await this.getConnection();
+    try {
+      const result = await connection.execute(
+        `SELECT 
+          a.APPOINTMENT_ID,
+          a.APPOINTMENT_DATE,
+          a.APPOINTMENT_TIME,
+          a.STATUS,
+          p.PATIENT_NAME,
+          p.PHONE_NUMBER
+        FROM APPOINTMENT a
+        LEFT JOIN PATIENTS p ON a.PATIENT_ID = p.PATIENT_ID
+        WHERE a.DOCTOR_ID = :doctorId
+        ORDER BY a.APPOINTMENT_DATE DESC, a.APPOINTMENT_TIME DESC`,
+        [doctorId]
+      );
+      return result.rows;
+    } catch (error) {
+      throw error;
+    } finally {
+      await connection.close();
+    }
+  }
+
+  // Get appointments by patient
+  async getAppointmentsByPatient(patientId) {
+    const connection = await this.getConnection();
+    try {
+      const result = await connection.execute(
+        `SELECT 
+          a.APPOINTMENT_ID,
+          a.APPOINTMENT_DATE,
+          a.APPOINTMENT_TIME,
+          a.STATUS,
+          d.DOCTOR_NAME,
+          d.DEPARTMENT,
+          d.PHONE_NUMBER as DOCTOR_PHONE
+        FROM APPOINTMENT a
+        LEFT JOIN DOCTORS d ON a.DOCTOR_ID = d.DOCTOR_ID
+        WHERE a.PATIENT_ID = :patientId
+        ORDER BY a.APPOINTMENT_DATE DESC, a.APPOINTMENT_TIME DESC`,
+        [patientId]
       );
       return result.rows;
     } catch (error) {
