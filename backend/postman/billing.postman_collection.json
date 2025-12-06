@@ -1,0 +1,147 @@
+{
+  "info": {
+    "_postman_id": "8b9e1c8a-3d2a-4e8d-9f1c-123456789abc",
+    "name": "Hospital Management - Billing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Get All Bills",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3001/api/billing",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3001",
+          "path": ["api", "billing"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "2. Get Bill By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3001/api/billing/501",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3001",
+          "path": ["api", "billing", "501"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "3. Create Bill",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"billing_id\": 501,\n  \"patient_id\": 101,\n  \"appointment_id\": 1,\n  \"walkin_id\": null,\n  \"bill_date\": \"2024-12-10\",\n  \"total_amount\": 3000,\n  \"tax_amount\": 200,\n  \"payment_status\": \"Pending\",\n  \"payment_method\": \"Cash\",\n  \"payment_date\": null,\n  \"bill_type\": \"Consultation\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3001/api/billing",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3001",
+          "path": ["api", "billing"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "4. Update Bill",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"total_amount\": 3200,\n  \"tax_amount\": 250,\n  \"payment_status\": \"Paid\",\n  \"payment_method\": \"Credit Card\",\n  \"payment_date\": \"2024-12-12\",\n  \"bill_type\": \"Consultation Updated\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3001/api/billing/501",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3001",
+          "path": ["api", "billing", "501"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "5. Delete Bill",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3001/api/billing/501",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3001",
+          "path": ["api", "billing", "501"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "6. Get Bills By Patient",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3001/api/billing/patient/101",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3001",
+          "path": ["api", "billing", "patient", "101"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "7. Get Bills By Patient & Appointment",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3001/api/billing/patient/101/appointment/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3001",
+          "path": ["api", "billing", "patient", "101", "appointment", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "8. Get Pending Bills",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3001/api/billing/pending/all",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3001",
+          "path": ["api", "billing", "pending", "all"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
