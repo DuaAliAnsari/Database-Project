@@ -26,7 +26,7 @@ app.use("/api/appointments", appointmentRoutes);
 app.use("/api/billing", billingRoutes);
 app.use("/api/prescriptions", prescriptionRoutes);
 
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
   res.json({ 
     message: "Hospital Management System API is running!",
     endpoints: {

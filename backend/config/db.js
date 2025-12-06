@@ -1,4 +1,5 @@
 const oracledb = require('oracledb');
+oracledb.fetchAsString = [ oracledb.CLOB ];
 
 let pool;
 

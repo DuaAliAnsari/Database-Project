@@ -1,7 +1,7 @@
 {
   "info": {
-    "_postman_id": "hospital-mgmt-prescription-api-v1",
-    "name": "Hospital Management - Prescription APIs",
+    "_postman_id": "3127c478-2a13-4b8e-b43a-11b7ab9a5d75",
+    "name": "Hospital Management - Prescription APIs Copy",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -10,34 +10,46 @@
       "item": [
         {
           "name": "1. Get All Prescriptions",
+          "id": "cd964444-4c67-4160-9010-5d79435fff95",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/prescriptions",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "prescriptions"]
+              "path": [
+                "api",
+                "prescriptions"
+              ]
             }
           }
         },
         {
           "name": "2. Get Prescription By ID",
+          "id": "bf377d83-711d-4fe9-a4ce-85124c3844eb",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/prescriptions/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "prescriptions", "1"]
+              "path": [
+                "api",
+                "prescriptions",
+                "1"
+              ]
             }
           }
         },
         {
           "name": "3. Create Prescription",
+          "id": "bc19d49f-855b-473f-aa05-9db94ba36af9",
           "request": {
             "method": "POST",
             "header": [
@@ -53,14 +65,20 @@
             "url": {
               "raw": "http://localhost:3001/api/prescriptions",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "prescriptions"]
+              "path": [
+                "api",
+                "prescriptions"
+              ]
             }
           }
         },
         {
           "name": "4. Update Prescription",
+          "id": "98fa6bd5-5f95-4eea-99dc-083215be4986",
           "request": {
             "method": "PUT",
             "header": [
@@ -76,49 +94,70 @@
             "url": {
               "raw": "http://localhost:3001/api/prescriptions/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "prescriptions", "1"]
+              "path": [
+                "api",
+                "prescriptions",
+                "1"
+              ]
             }
           }
         },
         {
           "name": "5. Delete Prescription",
+          "id": "3f56bd9e-184e-4375-9565-5132c7ae3290",
           "request": {
             "method": "DELETE",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/prescriptions/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "prescriptions", "1"]
+              "path": [
+                "api",
+                "prescriptions",
+                "1"
+              ]
             }
           }
         },
         {
           "name": "6. Get Prescriptions By Patient",
+          "id": "3623254f-d993-44aa-a018-9b379213a200",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/prescriptions/patient/101",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "prescriptions", "patient", "101"]
+              "path": [
+                "api",
+                "prescriptions",
+                "patient",
+                "101"
+              ]
             }
           }
         },
         {
           "name": "7. Get Prescriptions By Patient & Appointment",
+          "id": "0db9a077-da25-4794-b988-eca375438db1",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/prescriptions/patient/101/appointment/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
               "path": [
                 "api",
@@ -131,7 +170,8 @@
             }
           }
         }
-      ]
+      ],
+      "id": "e633da69-4621-4916-a162-0af9873ca7a6"
     }
   ]
 }

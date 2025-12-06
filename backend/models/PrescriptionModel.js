@@ -9,21 +9,21 @@ class PrescriptionModel {
 
   // Get all prescriptions
   async getAllPrescriptions() {
-    const conn = await this.getConnection();
-    try {
-      const result = await conn.execute(
-        `SELECT prescription_id, appointment_id, walkin_id, patient_id,
-                doctor_id, medication_name, dosage, frequency, duration,
-                instructions, issue_date
-         FROM Prescription
-         ORDER BY issue_date DESC`
-      );
-      return result.rows;
-    } finally {
-      await conn.close();
-    }
+  const conn = await this.getConnection();
+  try {
+    const result = await conn.execute(
+      `SELECT prescription_id, appointment_id, walkin_id, patient_id,
+              doctor_id, medication_name, dosage, frequency, duration,
+              DBMS_LOB.SUBSTR(instructions, 4000, 1) AS instructions,
+              TO_CHAR(issue_date, 'YYYY-MM-DD') AS issue_date
+       FROM Prescription
+       ORDER BY issue_date DESC`
+    );
+    return result.rows.map(r => ({ ...r }));
+  } finally {
+    await conn.close();
   }
-
+}
   // Get prescription by ID
   async getPrescriptionById(id) {
     const conn = await this.getConnection();
@@ -32,7 +32,7 @@ class PrescriptionModel {
         `SELECT * FROM Prescription WHERE prescription_id = :id`,
         [id]
       );
-      return result.rows[0];
+      return result.rows.length ? { ...result.rows[0] } : null;
     } finally {
       await conn.close();
     }
@@ -116,7 +116,7 @@ class PrescriptionModel {
          ORDER BY issue_date DESC`,
         [patientId]
       );
-      return result.rows;
+      return result.rows.map(r => ({ ...r }));
     } finally {
       await conn.close();
     }
@@ -136,7 +136,7 @@ class PrescriptionModel {
          ORDER BY issue_date DESC`,
         { patientId, appointmentId }
       );
-      return result.rows;
+      return result.rows.map(r => ({ ...r }));
     } finally {
       await conn.close();
     }

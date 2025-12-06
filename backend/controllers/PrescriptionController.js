@@ -2,15 +2,19 @@
 const PrescriptionModel = require("../models/PrescriptionModel");
 
 class PrescriptionController {
-  async getAllPrescriptions() {
-  const conn = await this.getConnection();
+    async getAllPrescriptions(req, res) {
   try {
-    const result = await conn.execute(/* query */);
-    return result.rows.map(r => r);   // ensures plain array
-  } finally {
-    await conn.close();
+    const prescriptions = await PrescriptionModel.getAllPrescriptions();
+
+    console.log("📌 RAW PRESCRIPTIONS VALUE BELOW");
+    console.dir(prescriptions, { depth: 5 }); // <-- ADD THIS LINE
+
+    res.status(200).json({ success: true, data: prescriptions });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
   }
 }
+
 
   async getPrescriptionById(req, res) {
     try {
