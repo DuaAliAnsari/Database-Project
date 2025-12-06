@@ -1,0 +1,137 @@
+{
+  "info": {
+    "_postman_id": "hospital-mgmt-prescription-api-v1",
+    "name": "Hospital Management - Prescription APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Prescription",
+      "item": [
+        {
+          "name": "1. Get All Prescriptions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/prescriptions",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "prescriptions"]
+            }
+          }
+        },
+        {
+          "name": "2. Get Prescription By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/prescriptions/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "prescriptions", "1"]
+            }
+          }
+        },
+        {
+          "name": "3. Create Prescription",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prescription_id\": 1,\n  \"appointment_id\": 1,\n  \"walkin_id\": null,\n  \"patient_id\": 101,\n  \"doctor_id\": 1,\n  \"medication_name\": \"Paracetamol 500mg\",\n  \"dosage\": \"1 tablet\",\n  \"frequency\": \"3 times a day\",\n  \"duration\": \"5 days\",\n  \"instructions\": \"Take after meals\",\n  \"issue_date\": \"2024-12-06\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/prescriptions",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "prescriptions"]
+            }
+          }
+        },
+        {
+          "name": "4. Update Prescription",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointment_id\": 1,\n  \"walkin_id\": null,\n  \"patient_id\": 101,\n  \"doctor_id\": 1,\n  \"medication_name\": \"Paracetamol 500mg\",\n  \"dosage\": \"1 tablet\",\n  \"frequency\": \"2 times a day\",\n  \"duration\": \"3 days\",\n  \"instructions\": \"Take after meals with water\",\n  \"issue_date\": \"2024-12-07\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/api/prescriptions/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "prescriptions", "1"]
+            }
+          }
+        },
+        {
+          "name": "5. Delete Prescription",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/prescriptions/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "prescriptions", "1"]
+            }
+          }
+        },
+        {
+          "name": "6. Get Prescriptions By Patient",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/prescriptions/patient/101",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": ["api", "prescriptions", "patient", "101"]
+            }
+          }
+        },
+        {
+          "name": "7. Get Prescriptions By Patient & Appointment",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3001/api/prescriptions/patient/101/appointment/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3001",
+              "path": [
+                "api",
+                "prescriptions",
+                "patient",
+                "101",
+                "appointment",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
