@@ -27,7 +27,17 @@ app.use("/", (req, res) => {
     endpoints: {
       doctors: "/api/doctors",
       patients: "/api/patients",
-      appointments: "/api/appointments"
+      appointments: "/api/appointments",
+       billing: "/api/billing"
+      // labTests: "/api/lab-tests",
+      // medicalHistory: "/api/medical-history",
+      // nurses: "/api/nurses",
+      // nurseAssignments: "/api/nurse-assignments",
+      // rooms: "/api/rooms",
+      // roomAssignments: "/api/room-assignments",
+      // prescriptions: "/api/prescriptions",
+      // visitRecords: "/api/visit-records",
+      // walkins: "/api/walkins"
     }
   });
 });
