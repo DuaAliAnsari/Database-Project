@@ -8,6 +8,7 @@ const patientRoutes = require("./routes/patientsRoutes");
 const appointmentRoutes = require("./routes/AppointmentRoutes");
 const prescriptionRoutes = require("./routes/PrescriptionRoutes");
 const billingRoutes = require("./routes/BillingRoutes");
+const visitRecordRoutes = require("./routes/VisitRecordRoutes");
 
 
 const db = require("./config/db");
@@ -25,6 +26,8 @@ app.use("/api/patients", patientRoutes);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/billing", billingRoutes);
 app.use("/api/prescriptions", prescriptionRoutes);
+app.use("/api/visits", visitRecordRoutes);
+
 
 app.get("/", (req, res) => {
   res.json({ 
@@ -40,8 +43,8 @@ app.get("/", (req, res) => {
       // nurseAssignments: "/api/nurse-assignments",
       // rooms: "/api/rooms",
       // roomAssignments: "/api/room-assignments",
-      prescriptions: "/api/prescriptions"
-      // visitRecords: "/api/visit-records",
+      prescriptions: "/api/prescriptions",
+       visitRecords: "/api/visit-records"
       // walkins: "/api/walkins"
     }
   });
