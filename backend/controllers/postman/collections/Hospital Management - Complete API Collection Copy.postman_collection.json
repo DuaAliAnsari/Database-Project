@@ -1,7 +1,7 @@
 {
   "info": {
-    "_postman_id": "hospital-mgmt-complete-api-v2",
-    "name": "Hospital Management - Complete API Collection",
+    "_postman_id": "b474d7ca-5f96-44ef-a532-feeb106ffcc1",
+    "name": "Hospital Management - Complete API Collection Copy",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -10,34 +10,46 @@
       "item": [
         {
           "name": "1. Get All Appointments",
+          "id": "3d0edcf9-1a54-48d6-b933-7bf3edbb2e89",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/appointments",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "appointments"]
+              "path": [
+                "api",
+                "appointments"
+              ]
             }
           }
         },
         {
           "name": "2. Get Appointment By ID",
+          "id": "cdad3f17-12a5-4665-8fbe-e6f11cb18b9d",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/appointments/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "appointments", "1"]
+              "path": [
+                "api",
+                "appointments",
+                "1"
+              ]
             }
           }
         },
         {
           "name": "3. Create Appointment",
+          "id": "0c6480c4-b58d-4b39-80de-c88136fa7cc6",
           "request": {
             "method": "POST",
             "header": [
@@ -53,14 +65,20 @@
             "url": {
               "raw": "http://localhost:3001/api/appointments",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "appointments"]
+              "path": [
+                "api",
+                "appointments"
+              ]
             }
           }
         },
         {
           "name": "4. Update Appointment",
+          "id": "d7d8b94e-75f9-4e68-b62d-452cf34c6f0e",
           "request": {
             "method": "PUT",
             "header": [
@@ -76,57 +94,103 @@
             "url": {
               "raw": "http://localhost:3001/api/appointments/11",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "appointments", "11"]
+              "path": [
+                "api",
+                "appointments",
+                "11"
+              ]
             }
           }
         },
-      
+        {
+          "name": "5. Delete Appointment",
+          "id": "b50111a5-947c-4d12-bd26-a5c843ca3932",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:3001/api/appointments/11",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "api",
+                "appointments",
+                "11"
+              ]
+            }
+          }
+        },
         {
           "name": "6. Get Appointments By Status",
+          "id": "2346fcfc-cf7d-4793-a2d3-8c49a3de5db4",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/appointments/status/Scheduled",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "appointments", "status", "Scheduled"]
+              "path": [
+                "api",
+                "appointments",
+                "status",
+                "Scheduled"
+              ]
             }
           }
         },
         {
           "name": "7. Get Appointments By Date",
+          "id": "ade9e179-c9f0-4dc1-b63b-1acc9dc92f54",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/appointments/date/2024-12-05",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "appointments", "date", "2024-12-05"]
+              "path": [
+                "api",
+                "appointments",
+                "date",
+                "2024-12-05"
+              ]
             }
           }
         },
         {
           "name": "8. Get Upcoming Appointments",
+          "id": "3b99de0c-a367-4a3e-af6e-acdda3f00f62",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/appointments/upcoming",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "appointments", "upcoming"]
+              "path": [
+                "api",
+                "appointments",
+                "upcoming"
+              ]
             }
           }
         },
         {
           "name": "9. Update Appointment Status",
+          "id": "39a2a1f5-ad8c-4e32-8b5c-785e028a47c5",
           "request": {
             "method": "PATCH",
             "header": [
@@ -142,75 +206,109 @@
             "url": {
               "raw": "http://localhost:3001/api/appointments/1/status",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "appointments", "1", "status"]
+              "path": [
+                "api",
+                "appointments",
+                "1",
+                "status"
+              ]
             }
           }
         },
         {
           "name": "10. Get Appointments By Doctor",
+          "id": "90a07a64-a904-4482-b578-b401e9737179",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/appointments/doctor/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "appointments", "doctor", "1"]
+              "path": [
+                "api",
+                "appointments",
+                "doctor",
+                "1"
+              ]
             }
           }
         },
         {
           "name": "11. Get Appointments By Patient",
+          "id": "a4cf9c91-00f8-46f2-a0b8-6c853a8c0f23",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/appointments/patient/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "appointments", "patient", "1"]
+              "path": [
+                "api",
+                "appointments",
+                "patient",
+                "1"
+              ]
             }
           }
         }
-      ]
+      ],
+      "id": "78e7a906-251c-4295-99c3-87410393fb2d"
     },
     {
       "name": "Patients",
       "item": [
         {
           "name": "1. Get All Patients",
+          "id": "ffa56ff6-53a4-416d-90e7-a8b2b584943f",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/patients",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "patients"]
+              "path": [
+                "api",
+                "patients"
+              ]
             }
           }
         },
         {
           "name": "2. Get Patient By ID",
+          "id": "f6878ae9-f55c-41f3-a29b-e1dd1a9b59e5",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/patients/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "patients", "1"]
+              "path": [
+                "api",
+                "patients",
+                "1"
+              ]
             }
           }
         },
         {
           "name": "3. Create Patient",
+          "id": "60eddf9d-641c-4975-9c3c-bd5c9393a971",
           "request": {
             "method": "POST",
             "header": [
@@ -226,14 +324,20 @@
             "url": {
               "raw": "http://localhost:3001/api/patients",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "patients"]
+              "path": [
+                "api",
+                "patients"
+              ]
             }
           }
         },
         {
           "name": "4. Update Patient",
+          "id": "f284c999-7545-4f68-8579-703b47334aa9",
           "request": {
             "method": "PUT",
             "header": [
@@ -249,24 +353,55 @@
             "url": {
               "raw": "http://localhost:3001/api/patients/6",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "patients", "6"]
+              "path": [
+                "api",
+                "patients",
+                "6"
+              ]
             }
           }
         },
-        
+        {
+          "name": "5. Delete Patient",
+          "id": "0be1a507-874c-479e-8950-5b3177c4d1d0",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:3001/api/patients/6",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "api",
+                "patients",
+                "6"
+              ]
+            }
+          }
+        },
         {
           "name": "6. Search Patients By Name",
+          "id": "927c1ec7-a773-46d3-b115-50e20869a079",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/patients/search?q=Ali",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "patients", "search"],
+              "path": [
+                "api",
+                "patients",
+                "search"
+              ],
               "query": [
                 {
                   "key": "q",
@@ -278,53 +413,73 @@
         },
         {
           "name": "7. Get Patient Appointments",
+          "id": "36a92b2e-041e-4ee0-8079-060f8e2eb776",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/patients/1/appointments",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "patients", "1", "appointments"]
+              "path": [
+                "api",
+                "patients",
+                "1",
+                "appointments"
+              ]
             }
           }
         }
-      ]
+      ],
+      "id": "fb2eae71-5811-4c15-9952-f9b7bc1e3049"
     },
     {
       "name": "Doctors",
       "item": [
         {
           "name": "1. Get All Doctors",
+          "id": "af88f5ce-6cc9-47c2-94a6-fbdda6737a8c",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/doctors",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "doctors"]
+              "path": [
+                "api",
+                "doctors"
+              ]
             }
           }
         },
         {
           "name": "2. Get Doctor By ID",
+          "id": "457da9e4-98fb-4080-b752-5923cf91b72e",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/doctors/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "doctors", "1"]
+              "path": [
+                "api",
+                "doctors",
+                "1"
+              ]
             }
           }
         },
         {
           "name": "3. Create Doctor",
+          "id": "3f1f0454-ca87-451b-a849-77006d052922",
           "request": {
             "method": "POST",
             "header": [
@@ -340,14 +495,20 @@
             "url": {
               "raw": "http://localhost:3001/api/doctors",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "doctors"]
+              "path": [
+                "api",
+                "doctors"
+              ]
             }
           }
         },
         {
           "name": "4. Update Doctor",
+          "id": "b9a596f9-2a31-4287-b66d-b35fbc9aeba8",
           "request": {
             "method": "PUT",
             "header": [
@@ -363,37 +524,55 @@
             "url": {
               "raw": "http://localhost:3001/api/doctors/6",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "doctors", "6"]
+              "path": [
+                "api",
+                "doctors",
+                "6"
+              ]
             }
           }
         },
         {
           "name": "5. Delete Doctor",
+          "id": "b75d8dad-c6da-4665-82d3-5d4fb9277065",
           "request": {
             "method": "DELETE",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/doctors/6",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "doctors", "6"]
+              "path": [
+                "api",
+                "doctors",
+                "6"
+              ]
             }
           }
         },
         {
           "name": "6. Search Doctors By Name",
+          "id": "78e5ae9d-e16a-46a9-980c-bc2a6866e4cc",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/doctors/search?q=John",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "doctors", "search"],
+              "path": [
+                "api",
+                "doctors",
+                "search"
+              ],
               "query": [
                 {
                   "key": "q",
@@ -405,33 +584,48 @@
         },
         {
           "name": "7. Get Doctors By Department",
+          "id": "0796a112-6728-4099-b6f5-f3ce1f1d6d02",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/doctors/department/Cardiology",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "doctors", "department", "Cardiology"]
+              "path": [
+                "api",
+                "doctors",
+                "department",
+                "Cardiology"
+              ]
             }
           }
         },
         {
           "name": "8. Get Doctor Appointments",
+          "id": "c704296b-8c1d-499a-b438-c6d4fc4c6058",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:3001/api/doctors/1/appointments",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "3001",
-              "path": ["api", "doctors", "1", "appointments"]
+              "path": [
+                "api",
+                "doctors",
+                "1",
+                "appointments"
+              ]
             }
           }
         }
-      ]
+      ],
+      "id": "11f5dc4b-575c-499e-9762-d60653e38dd4"
     }
   ]
 }

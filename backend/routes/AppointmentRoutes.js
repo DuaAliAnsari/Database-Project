@@ -1,39 +1,42 @@
 // routes/appointmentRoutes.js
 const express = require('express');
 const router = express.Router();
-const AppointmentController = require('../controllers/AppointmentController');
+const appointmentController = require('../controllers/AppointmentController');
+
+// Check available slots (must be before /:id routes)
+router.get('/available-slots', appointmentController.checkAvailableSlots);
 
 // Get all appointments
-router.get('/', AppointmentController.getAllAppointments.bind(AppointmentController));
+router.get('/', appointmentController.getAllAppointments);
 
-// Get upcoming appointments (must be before /:id route)
-router.get('/upcoming', AppointmentController.getUpcomingAppointments.bind(AppointmentController));
+// Get upcoming appointments
+router.get('/upcoming', appointmentController.getUpcomingAppointments);
 
 // Get appointments by status
-router.get('/status/:status', AppointmentController.getAppointmentsByStatus.bind(AppointmentController));
+router.get('/status/:status', appointmentController.getAppointmentsByStatus);
 
 // Get appointments by date
-router.get('/date/:date', AppointmentController.getAppointmentsByDate.bind(AppointmentController));
+router.get('/date/:date', appointmentController.getAppointmentsByDate);
 
 // Get appointments by doctor
-router.get('/doctor/:doctorId', AppointmentController.getAppointmentsByDoctor.bind(AppointmentController));
+router.get('/doctor/:doctorId', appointmentController.getAppointmentsByDoctor);
 
 // Get appointments by patient
-router.get('/patient/:patientId', AppointmentController.getAppointmentsByPatient.bind(AppointmentController));
+router.get('/patient/:patientId', appointmentController.getAppointmentsByPatient);
 
 // Get appointment by ID
-router.get('/:id', AppointmentController.getAppointmentById.bind(AppointmentController));
+router.get('/:id', appointmentController.getAppointmentById);
 
 // Create new appointment
-router.post('/', AppointmentController.createAppointment.bind(AppointmentController));
+router.post('/', appointmentController.createAppointment);
 
 // Update appointment
-router.put('/:id', AppointmentController.updateAppointment.bind(AppointmentController));
+router.put('/:id', appointmentController.updateAppointment);
 
 // Update appointment status
-router.patch('/:id/status', AppointmentController.updateAppointmentStatus.bind(AppointmentController));
+router.patch('/:id/status', appointmentController.updateAppointmentStatus);
 
 // Delete appointment
-router.delete('/:id', AppointmentController.deleteAppointment.bind(AppointmentController));
+router.delete('/:id', appointmentController.deleteAppointment);
 
 module.exports = router;

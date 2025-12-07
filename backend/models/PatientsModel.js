@@ -126,24 +126,7 @@ class PatientModel {
     }
   }
 
-  // Delete patient
-  async deletePatient(patientId) {
-    const connection = await this.getConnection();
-    try {
-      const result = await connection.execute(
-        `DELETE FROM Patients WHERE patient_id = :patient_id`,
-        [patientId],
-        { autoCommit: true }
-      );
-
-      return { success: true, rowsAffected: result.rowsAffected };
-    } catch (error) {
-      throw error;
-    } finally {
-      await connection.close();
-    }
-  }
-
+  
   // Get patient appointments
   async getPatientAppointments(patientId) {
     const connection = await this.getConnection();

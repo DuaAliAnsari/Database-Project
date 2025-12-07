@@ -73,23 +73,6 @@ class PatientController {
     }
   }
 
-  // Delete patient
-  async deletePatient(req, res) {
-    try {
-      const patientId = req.params.id;
-      const result = await PatientModel.deletePatient(patientId);
-
-      if (result.rowsAffected === 0) {
-        return res.status(404).json({ success: false, message: "Patient not found" });
-      }
-
-      res.status(200).json({ success: true, message: "Patient deleted successfully" });
-    } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ success: false, message: error.message });
-    }
-  }
-
   // Get patient appointments
   async getPatientAppointments(req, res) {
     try {

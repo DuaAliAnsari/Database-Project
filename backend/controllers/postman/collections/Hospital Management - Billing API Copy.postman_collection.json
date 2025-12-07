@@ -1,0 +1,192 @@
+{
+  "info": {
+    "_postman_id": "55609a02-797f-4ed2-9e9f-d088813d42eb",
+    "name": "Hospital Management - Billing API Copy",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Get All Bills",
+      "id": "a1400403-9b39-42c5-af49-dbd316658395",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3001/api/billing",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "billing"
+          ]
+        }
+      }
+    },
+    {
+      "name": "2. Get Bill By ID",
+      "id": "39c92b1b-25cb-4cad-8b49-ff4accbb14f7",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3001/api/billing/501",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "billing",
+            "501"
+          ]
+        }
+      }
+    },
+    {
+      "name": "3. Create Bill",
+      "id": "c51eb0f0-c332-4460-8278-a33a9cb871f5",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"billing_id\": 501,\n  \"patient_id\": 101,\n  \"appointment_id\": 1,\n  \"walkin_id\": null,\n  \"bill_date\": \"2024-12-10\",\n  \"total_amount\": 3000,\n  \"tax_amount\": 200,\n  \"payment_status\": \"Pending\",\n  \"payment_method\": \"Cash\",\n  \"payment_date\": null,\n  \"bill_type\": \"Consultation\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3001/api/billing",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "billing"
+          ]
+        }
+      }
+    },
+    {
+      "name": "4. Update Bill",
+      "id": "420270f0-33de-4ef5-9666-b018cba2d122",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"total_amount\": 3200,\n  \"tax_amount\": 250,\n  \"payment_status\": \"Paid\",\n  \"payment_method\": \"Credit Card\",\n  \"payment_date\": \"2024-12-12\",\n  \"bill_type\": \"Consultation Updated\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3001/api/billing/501",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "billing",
+            "501"
+          ]
+        }
+      }
+    },
+    {
+      "name": "5. Delete Bill",
+      "id": "d994bb82-0e7c-41f5-848f-3e7e70d1221a",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:3001/api/billing/501",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "billing",
+            "501"
+          ]
+        }
+      }
+    },
+    {
+      "name": "6. Get Bills By Patient",
+      "id": "a947115c-d210-4613-ac32-64e209972186",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3001/api/billing/patient/101",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "billing",
+            "patient",
+            "101"
+          ]
+        }
+      }
+    },
+    {
+      "name": "7. Get Bills By Patient & Appointment",
+      "id": "a3be24f3-d82e-453c-8eff-06dcbea9ce03",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3001/api/billing/patient/101/appointment/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "billing",
+            "patient",
+            "101",
+            "appointment",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "8. Get Pending Bills",
+      "id": "96a8d485-9cf8-42cb-a63b-e2f2b58b2635",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3001/api/billing/pending/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "billing",
+            "pending",
+            "all"
+          ]
+        }
+      }
+    }
+  ]
+}

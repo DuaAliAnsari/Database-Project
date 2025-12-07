@@ -73,6 +73,22 @@ class AppointmentModel {
     }
   }
 
+  // Check available slots for a doctor on a specific date
+  async checkAvailableSlots(doctorId, appointmentDate) {
+    const connection = await this.getConnection();
+    try {
+      const result = await connection.execute(
+        `SELECT get_available_slots(:doctorId, TO_DATE(:appointmentDate, 'YYYY-MM-DD')) as AVAILABLE_SLOTS FROM DUAL`,
+        { doctorId, appointmentDate }
+      );
+      return result.rows[0]?.AVAILABLE_SLOTS || 0;
+    } catch (error) {
+      throw error;
+    } finally {
+      await connection.close();
+    }
+  }
+
   // Create new appointment
   async createAppointment(appointmentData) {
     const connection = await this.getConnection();
@@ -190,32 +206,32 @@ class AppointmentModel {
 
   // Get appointments for a specific date
   async getAppointmentsByDate(date) {
-    const connection = await this.getConnection();
-    try {
-      const result = await connection.execute(
-        `SELECT 
-          a.APPOINTMENT_ID,
-          a.APPOINTMENT_DATE,
-          a.APPOINTMENT_TIME,
-          a.STATUS,
-          p.PATIENT_NAME,
-          p.PHONE_NUMBER,
-          d.DOCTOR_NAME,
-          d.DEPARTMENT
-        FROM APPOINTMENT a
-        LEFT JOIN PATIENTS p ON a.PATIENT_ID = p.PATIENT_ID
-        LEFT JOIN DOCTORS d ON a.DOCTOR_ID = d.DOCTOR_ID
-        WHERE TRUNC(a.APPOINTMENT_DATE) = TO_DATE(:date, 'YYYY-MM-DD')
-        ORDER BY a.APPOINTMENT_TIME`,
-        [date]
-      );
-      return result.rows;
-    } catch (error) {
-      throw error;
-    } finally {
-      await connection.close();
-    }
+  const connection = await this.getConnection();
+  try {
+    const result = await connection.execute(
+      `SELECT 
+        a.APPOINTMENT_ID,
+        a.APPOINTMENT_DATE,
+        a.APPOINTMENT_TIME,
+        a.STATUS,
+        p.PATIENT_NAME,
+        p.PHONE_NUMBER,
+        d.DOCTOR_NAME,
+        d.DEPARTMENT
+      FROM APPOINTMENT a
+      LEFT JOIN PATIENTS p ON a.PATIENT_ID = p.PATIENT_ID
+      LEFT JOIN DOCTORS d ON a.DOCTOR_ID = d.DOCTOR_ID
+      WHERE TRUNC(a.APPOINTMENT_DATE) = TRUNC(TO_DATE(:1, 'YYYY-MM-DD'))
+      ORDER BY a.APPOINTMENT_TIME`,
+      [date]
+    );
+    return result.rows;
+  } catch (error) {
+    throw error;
+  } finally {
+    await connection.close();
   }
+}
 
   // Update appointment status
   async updateAppointmentStatus(appointmentId, status) {

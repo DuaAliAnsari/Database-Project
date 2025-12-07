@@ -1,0 +1,169 @@
+{
+  "info": {
+    "_postman_id": "3aed5212-22e9-4248-8d48-58673ac4d6d8",
+    "name": "Hospital Management - Visit Records API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Get All Visit Records",
+      "id": "3b6e45b6-9584-4f48-b4e2-51b187985874",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3001/api/visits",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "visits"
+          ]
+        }
+      }
+    },
+    {
+      "name": "2. Get Visit By ID",
+      "id": "d2893616-5ee2-4386-b59b-55e11eb28a6f",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3001/api/visits/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "visits",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "3. Get Visit Records By Patient ID",
+      "id": "832381c4-7f1c-4588-b870-48c8f06b345f",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3001/api/visits/patient/101",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "visits",
+            "patient",
+            "101"
+          ]
+        }
+      }
+    },
+    {
+      "name": "4. Add Visit Record",
+      "id": "685f78cf-06bb-4480-bc1d-e839fe9be2b2",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"appointment_id\": 1,\n  \"doctor_id\": 3,\n  \"patient_id\": 101,\n  \"diagnosis\": \"Seasonal flu\",\n  \"notes\": \"Prescribed Vitamin C and rest\",\n  \"next_visit_date\": \"2025-01-20\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3001/api/visits",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "visits"
+          ]
+        }
+      }
+    },
+    {
+      "name": "5. Update Visit Record",
+      "id": "1c445222-2263-4175-bff9-1f39a9ac5375",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"diagnosis\": \"Updated cold symptoms\",\n  \"notes\": \"Continue Vitamin C\",\n  \"next_visit_date\": \"2025-01-25\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3001/api/visits/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "visits",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "6. Delete Visit Record",
+      "id": "75d8c0df-c231-4e63-aedd-7a5dda0ba2f3",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:3001/api/visits/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "visits",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "7. Get Visit Gap (Days Between Visits)",
+      "id": "189ecf55-504b-4402-94ef-747dddab9f5b",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3001/api/visits/1/gap",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "api",
+            "visits",
+            "1",
+            "gap"
+          ]
+        }
+      }
+    }
+  ]
+}

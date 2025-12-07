@@ -10,7 +10,6 @@ router.get('/', PatientController.getAllPatients);
 router.get('/:id', PatientController.getPatientById);
 router.post('/', PatientController.createPatient);
 router.put('/:id', PatientController.updatePatient);
-router.delete('/:id', PatientController.deletePatient);
 
 // Related data
 router.get('/:id/appointments', PatientController.getPatientAppointments);

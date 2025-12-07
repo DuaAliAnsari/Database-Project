@@ -143,24 +143,6 @@ class DoctorModel {
     }
   }
 
-  // Delete doctor
-  async deleteDoctor(doctorId) {
-    const connection = await this.getConnection();
-    try {
-      const result = await connection.execute(
-        `DELETE FROM Doctors WHERE doctor_id = :doctor_id`,
-        [doctorId],
-        { autoCommit: true }
-      );
-
-      return { success: true, rowsAffected: result.rowsAffected };
-    } catch (error) {
-      throw error;
-    } finally {
-      await connection.close();
-    }
-  }
-
   // Get doctor's appointments
   async getDoctorAppointments(doctorId) {
     const connection = await this.getConnection();

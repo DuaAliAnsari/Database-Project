@@ -50,6 +50,40 @@ class AppointmentController {
     }
   }
 
+  // Check available slots for a doctor on a specific date
+  async checkAvailableSlots(req, res) {
+    try {
+      const { doctorId, date } = req.query;
+      
+      if (!doctorId || !date) {
+        return res.status(400).json({ 
+          success: false,
+          message: 'Doctor ID and date are required' 
+        });
+      }
+
+      const availableSlots = await AppointmentModel.checkAvailableSlots(doctorId, date);
+      
+      res.status(200).json({ 
+        success: true,
+        data: {
+          doctorId,
+          date,
+          availableSlots,
+          maxSlots: 40,
+          bookedSlots: 40 - availableSlots
+        }
+      });
+    } catch (error) {
+      console.error('Error checking available slots:', error);
+      res.status(500).json({ 
+        success: false,
+        message: 'Failed to check available slots',
+        error: error.message 
+      });
+    }
+  }
+
   // Create new appointment
   async createAppointment(req, res) {
     try {
@@ -74,6 +108,16 @@ class AppointmentController {
       });
     } catch (error) {
       console.error('Error creating appointment:', error);
+      
+      // Check if it's the trigger error for appointment limit
+      if (error.message.includes('ORA-20001') || error.message.includes('limit reached')) {
+        return res.status(400).json({
+          success: false,
+          message: 'Appointment limit reached for this doctor on this date (Max: 40)',
+          error: error.message
+        });
+      }
+      
       res.status(500).json({
         success: false,
         message: 'Failed to create appointment',
@@ -106,6 +150,16 @@ class AppointmentController {
       });
     } catch (error) {
       console.error('Error updating appointment:', error);
+      
+      // Check if it's the trigger error for appointment limit
+      if (error.message.includes('ORA-20001') || error.message.includes('limit reached')) {
+        return res.status(400).json({
+          success: false,
+          message: 'Appointment limit reached for this doctor on this date (Max: 40)',
+          error: error.message
+        });
+      }
+      
       res.status(500).json({
         success: false,
         message: 'Failed to update appointment',

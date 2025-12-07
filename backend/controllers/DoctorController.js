@@ -85,23 +85,6 @@ class DoctorController {
     }
   }
 
-  // Delete doctor
-  async deleteDoctor(req, res) {
-    try {
-      const doctorId = req.params.id;
-      const result = await DoctorModel.deleteDoctor(doctorId);
-
-      if (result.rowsAffected === 0) {
-        return res.status(404).json({ success: false, message: "Doctor not found" });
-      }
-
-      res.status(200).json({ success: true, message: "Doctor deleted successfully" });
-    } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ success: false, message: error.message });
-    }
-  }
-
   // Get doctor appointments
   async getDoctorAppointments(req, res) {
     try {

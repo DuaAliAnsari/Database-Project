@@ -6,7 +6,13 @@ const express = require("express");
 const doctorRoutes = require("./routes/doctorRoutes");
 const patientRoutes = require("./routes/patientsRoutes");
 const appointmentRoutes = require("./routes/AppointmentRoutes");
+
 const medicalHistoryRoutes = require('./routes/MedicalHistoryRoutes');
+
+const prescriptionRoutes = require("./routes/PrescriptionRoutes");
+const billingRoutes = require("./routes/BillingRoutes");
+const visitRecordRoutes = require("./routes/VisitRecordRoutes");
+
 
 
 const db = require("./config/db");
@@ -23,8 +29,13 @@ app.use("/api/doctors", doctorRoutes);
 app.use("/api/patients", patientRoutes);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/medical-history", medicalHistoryRoutes);
+app.use("/api/billing", billingRoutes);
+app.use("/api/prescriptions", prescriptionRoutes);
+app.use("/api/visits", visitRecordRoutes);
 
-app.use("/", (req, res) => {
+
+
+app.get("/", (req, res) => {
   res.json({ 
     message: "Hospital Management System API is running!",
     endpoints: {
@@ -33,13 +44,13 @@ app.use("/", (req, res) => {
       appointments: "/api/appointments",
        billing: "/api/billing",
       // labTests: "/api/lab-tests",
-      medicalHistory: "/api/medical-history"
+      medicalHistory: "/api/medical-history",
       // nurses: "/api/nurses",
       // nurseAssignments: "/api/nurse-assignments",
       // rooms: "/api/rooms",
       // roomAssignments: "/api/room-assignments",
-      // prescriptions: "/api/prescriptions",
-      // visitRecords: "/api/visit-records",
+      prescriptions: "/api/prescriptions",
+       visitRecords: "/api/visit-records"
       // walkins: "/api/walkins"
     }
   });
