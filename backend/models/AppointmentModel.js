@@ -31,6 +31,7 @@ class AppointmentModel {
       );
       return result.rows;
     } catch (error) {
+      console.error("Error fetching appointments:", error);
       throw error;
     } finally {
       await connection.close();

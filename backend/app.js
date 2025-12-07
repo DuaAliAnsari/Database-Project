@@ -6,6 +6,8 @@ const express = require("express");
 const doctorRoutes = require("./routes/doctorRoutes");
 const patientRoutes = require("./routes/patientsRoutes");
 const appointmentRoutes = require("./routes/AppointmentRoutes");
+const medicalHistoryRoutes = require('./routes/MedicalHistoryRoutes');
+
 
 const db = require("./config/db");
 const bodyParser = require("body-parser");
@@ -20,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api/doctors", doctorRoutes);
 app.use("/api/patients", patientRoutes);
 app.use("/api/appointments", appointmentRoutes);
+app.use("/api/medical-history", medicalHistoryRoutes);
 
 app.use("/", (req, res) => {
   res.json({ 
@@ -28,9 +31,9 @@ app.use("/", (req, res) => {
       doctors: "/api/doctors",
       patients: "/api/patients",
       appointments: "/api/appointments",
-       billing: "/api/billing"
+       billing: "/api/billing",
       // labTests: "/api/lab-tests",
-      // medicalHistory: "/api/medical-history",
+      medicalHistory: "/api/medical-history"
       // nurses: "/api/nurses",
       // nurseAssignments: "/api/nurse-assignments",
       // rooms: "/api/rooms",

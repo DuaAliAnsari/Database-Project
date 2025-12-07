@@ -1,0 +1,77 @@
+{
+  "info": {
+    "_postman_id": "b4c2f9e1-556f-4b23-a25a-99861c72b892",
+    "name": "Medical History API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Get Medical History By Patient ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3001/api/medical-history/3",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3001",
+          "path": ["api", "medical-history", "3"]
+        }
+      }
+    },
+    {
+      "name": "2. Create Medical History",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"patient_id\": 3,\n  \"blood_group\": \"O-\",\n  \"allergies\": \"Pollen, Ibuprofen\",\n  \"surgeries\": \"C-section (2021)\",\n  \"vaccination\": \"Hepatitis A & B\",\n  \"family\": \"Family history of migraines\",\n  \"medical_checks\": \"Thyroid test done in 2024\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3001/api/medical-history",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3001",
+          "path": ["api", "medical-history"]
+        }
+      }
+    },
+    {
+      "name": "3. Update Medical History",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"patient_id\": 3,\n  \"blood_group\": \"B+\",\n  \"allergies\": \"Peanut allergy, Dust sensitivity\",\n  \"surgeries\": \"Tonsil removal (2018)\",\n  \"vaccination\": \"COVID-19 (2 doses), Flu shot 2024\",\n  \"family\": \"Family history of high cholesterol\",\n  \"medical_checks\": \"Full body checkup completed in 2023\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3001/api/medical-history",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3001",
+          "path": ["api", "medical-history"]
+        }
+      }
+    },
+    {
+      "name": "4. Delete Medical History",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3001/api/medical-history/3",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3001",
+          "path": ["api", "medical-history", "3"]
+        }
+      }
+    }
+  ]
+}

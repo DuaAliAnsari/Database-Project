@@ -7,6 +7,7 @@ class AppointmentController {
   async getAllAppointments(req, res) {
     try {
       const appointments = await AppointmentModel.getAllAppointments();
+      console.log("Query executed successfully. Rows returned:", appointments.rows),
       res.status(200).json({
         success: true,
         data: appointments,

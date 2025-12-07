@@ -1,0 +1,21 @@
+{
+  "name": "hms",
+  "version": "1.0.0",
+  "description": "This project is a **full-stack HR Management System** designed as teaching material for a database systems course. It demonstrates how a web application interacts with a relational database (OracleDB) using a Node.js backend and a React frontend.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DuaAliAnsari/Database-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DuaAliAnsari/Database-Project/issues"
+  },
+  "homepage": "https://github.com/DuaAliAnsari/Database-Project#readme"
+}
