@@ -47,10 +47,10 @@ class DoctorController {
     try {
       const newDoctor = req.body;
 
-      if (!newDoctor.doctor_id || !newDoctor.doctor_name) {
+      if ( !newDoctor.doctor_name) {
         return res.status(400).json({
           success: false,
-          message: "doctor_id and doctor_name are required"
+          message: " doctor_name are required"
         });
       }
 

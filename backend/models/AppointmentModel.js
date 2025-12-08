@@ -63,7 +63,8 @@ class AppointmentModel {
         LEFT JOIN PATIENTS p ON a.PATIENT_ID = p.PATIENT_ID
         LEFT JOIN DOCTORS d ON a.DOCTOR_ID = d.DOCTOR_ID
         WHERE a.APPOINTMENT_ID = :appointmentId`,
-        [appointmentId]
+        [appointmentId],
+      { outFormat: oracledb.OUT_FORMAT_OBJECT }
       );
       return result.rows[0];
     } catch (error) {
@@ -89,43 +90,52 @@ class AppointmentModel {
     }
   }
 
-  // Create new appointment
   async createAppointment(appointmentData) {
-    const connection = await this.getConnection();
-    try {
-      const result = await connection.execute(
-        `INSERT INTO APPOINTMENT (
-          APPOINTMENT_ID,
-          PATIENT_ID,
-          DOCTOR_ID,
-          APPOINTMENT_DATE,
-          APPOINTMENT_TIME,
-          STATUS
-        ) VALUES (
-          :appointment_id,
-          :patient_id,
-          :doctor_id,
-          TO_DATE(:appointment_date, 'YYYY-MM-DD'),
-          :appointment_time,
-          :status
-        )`,
-        {
-          appointment_id: appointmentData.appointment_id,
-          patient_id: appointmentData.patient_id,
-          doctor_id: appointmentData.doctor_id,
-          appointment_date: appointmentData.appointment_date,
-          appointment_time: appointmentData.appointment_time,
-          status: appointmentData.status || 'Scheduled'
-        },
-        { autoCommit: true }
-      );
-      return { success: true, appointmentId: appointmentData.appointment_id };
-    } catch (error) {
-      throw error;
-    } finally {
-      await connection.close();
-    }
+  const connection = await this.getConnection();
+  try {
+    // Insert appointment using sequence
+    await connection.execute(
+      `INSERT INTO APPOINTMENT (
+        APPOINTMENT_ID,
+        PATIENT_ID,
+        DOCTOR_ID,
+        APPOINTMENT_DATE,
+        APPOINTMENT_TIME,
+        STATUS
+      ) VALUES (
+        appointment_seq.NEXTVAL,
+        :patient_id,
+        :doctor_id,
+        TO_DATE(:appointment_date, 'YYYY-MM-DD'),
+        :appointment_time,
+        :status
+      )`,
+      {
+        patient_id: appointmentData.patient_id,
+        doctor_id: appointmentData.doctor_id,
+        appointment_date: appointmentData.appointment_date,
+        appointment_time: appointmentData.appointment_time,
+        status: appointmentData.status || 'Scheduled'
+      },
+      { autoCommit: true }
+    );
+
+    // Get the generated ID
+    const result = await connection.execute(
+      `SELECT appointment_seq.CURRVAL AS appointment_id FROM dual`
+    );
+
+    const appointmentId = result.rows[0][0]; // CURRVAL is in first row, first column
+
+    return { success: true, appointmentId };
+  } catch (error) {
+    console.error(error);
+    return { success: false, message: 'Failed to create appointment', error: error.message };
+  } finally {
+    await connection.close();
   }
+}
+
 
   // Update appointment
   async updateAppointment(appointmentId, appointmentData) {
@@ -235,7 +245,9 @@ class AppointmentModel {
 
   // Update appointment status
   async updateAppointmentStatus(appointmentId, status) {
+    
     const connection = await this.getConnection();
+    
     try {
       const result = await connection.execute(
         `UPDATE APPOINTMENT 

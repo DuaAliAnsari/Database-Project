@@ -35,7 +35,7 @@ class PatientController {
     try {
       const newPatient = req.body;
 
-      if (!newPatient.patient_id || !newPatient.patient_name) {
+      if ( !newPatient.patient_name) {
         return res.status(400).json({
           success: false,
           message: "patient_id and patient_name are required"

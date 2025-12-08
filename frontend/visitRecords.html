@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visit Records</title>
+  <style>
+    body { 
+      background-color: #121212; 
+      color: #f4f4f4; 
+      font-family: Arial, sans-serif; 
+      margin: 0; 
+    }
+    header {
+      display: flex; 
+      align-items: center;
+      background-color: #1f1f1f; 
+      padding: 10px 20px;
+    }
+    header img { 
+      width: 50px; 
+      height: 50px; 
+      margin-right: 15px; 
+    }
+    header h1 { 
+      margin: 0; 
+    }
+    main {
+      display: flex; 
+      flex-direction: column;
+      align-items: center; 
+      gap: 20px; 
+      margin-top: 50px;
+      width: 90%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    button.action-btn {
+      padding: 15px 40px; 
+      font-size: 18px;
+      border: none; 
+      border-radius: 8px;
+      cursor: pointer; 
+      background-color: #00bfa5; 
+      color: #fff;
+      transition: 0.2s;
+    }
+    button.action-btn:hover { 
+      background-color: #00a58f; 
+    }
+    .modal { 
+      display: none; 
+      position: fixed; 
+      z-index: 100; 
+      left: 0; 
+      top: 0; 
+      width: 100%; 
+      height: 100%; 
+      background-color: rgba(0,0,0,0.7); 
+    }
+ .modal-content {
+  position: relative;
+  background-color: #1f1f1f;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 20px;
+  width: 600px;
+  max-height: 80vh; /* limits height */
+  overflow-y: auto;  /* adds scroll if content exceeds max-height */
+  border-radius: 10px;
+  box-shadow: 0 0 15px #000;
+}
+
+    .modal-content input, .modal-content select, .modal-content textarea {
+      width: 100%; 
+      padding: 8px; 
+      margin: 8px 0;
+      border-radius: 5px; 
+      border: 1px solid #333; 
+      background-color: #2a2a2a; 
+      color: #f4f4f4;
+    }
+    .close-cross {
+      position: absolute; 
+      top: 10px; 
+      right: 15px;
+      font-size: 24px; 
+      cursor: pointer; 
+      color: #ff4d4d;
+    }
+    table { 
+      width: 100%; 
+      margin-top: 20px; 
+      border-collapse: collapse; 
+      text-align: center; 
+    }
+    th, td { 
+      border: 1px solid #333; 
+      padding: 8px; 
+    }
+    th { 
+      background-color: #2a2a2a; 
+    }
+    td { 
+      background-color: #1f1f1f; 
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://tse1.mm.bing.net/th/id/OIP.y9Wm3U5yHBe2-nfaphxiPwHaHV?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Logo">
+    <h1>Visit Records</h1>
+  </header>
+
+  <main>
+    <button class="action-btn" onclick="openModal('getVisitModal')">Get Visit By ID</button>
+    <button class="action-btn" onclick="getAllVisits()">Get All Visits</button>
+    <button class="action-btn" onclick="openModal('getPatientVisitsModal')">Get Visits By Patient</button>
+     <button class="action-btn" onclick="openModal('addModal')">Add Visit Record</button>
+     <!-- <button class="action-btn" onclick="openModal('updateModal')">Update Visit</button> -->
+
+  <!-- <button class="action-btn" onclick="getAllVisits()">Get All Visits</button> -->
+  <!-- <button class="action-btn" onclick="openModal('getPatientModal')">Get Visits By Patient</button> -->
+  </main>
+
+  <!-- Add Visit Modal -->
+<div id="addModal" class="modal">
+  <div class="modal-content">
+    <span class="close-cross" onclick="closeModal('addModal')">&times;</span>
+    <h2>Add Visit Record</h2>
+    <input type="number" id="addAppointmentId" placeholder="Appointment ID" required>
+    <input type="number" id="addDoctorId" placeholder="Doctor ID" required>
+    <input type="number" id="addPatientId" placeholder="Patient ID" required>
+    <input type="text" id="addDiagnosis" placeholder="Diagnosis" required>
+    <input type="text" id="addSymptoms" placeholder="Symptoms">
+    <input type="text" id="addTreatmentNotes" placeholder="Treatment Notes">
+    <input type="date" id="addVisitDate" placeholder="Visit Date">
+    <input type="text" id="addBloodPressure" placeholder="Blood Pressure">
+    <input type="number" step="0.1" id="addTemperature" placeholder="Temperature">
+    <input type="number" step="0.1" id="addWeight" placeholder="Weight">
+    <input type="time" id="addTime" placeholder="Time">
+    <button onclick="addVisit()">Add Visit</button>
+  </div>
+</div>
+  <!-- Get Visit By ID Modal -->
+  <div id="getVisitModal" class="modal">
+    <div class="modal-content">
+      <span class="close-cross" onclick="closeModal('getVisitModal')">&times;</span>
+      <h2>Get Visit By ID</h2>
+      <input type="number" id="visitId" placeholder="Visit ID">
+      <button onclick="getVisitById()">Get</button>
+      <div id="singleVisit"></div>
+    </div>
+  </div>
+
+  <!-- Update Visit Modal -->
+<!-- Update Visit Modal -->
+<div id="updateModal" class="modal">
+  <div class="modal-content">
+    <span class="close-cross" onclick="closeModal('updateModal')">&times;</span>
+    <h2>Update Visit Record</h2>
+
+    <!-- New input for Visit ID -->
+    <input type="number" id="updateVisitId" placeholder="Enter Visit ID to update" required>
+
+    <textarea id="updateDiagnosis" placeholder="Diagnosis"></textarea>
+    <textarea id="updateSymptoms" placeholder="Symptoms"></textarea>
+    <textarea id="updateTreatment" placeholder="Treatment Notes"></textarea>
+
+    <input type="number" id="updateWeight" placeholder="Weight">
+    <input type="number" id="updateTemperature" placeholder="Temperature">
+    <input type="text" id="updateBP" placeholder="Blood Pressure">
+    <input type="time" id="updateTime" placeholder="Time (HH:MM)">
+
+    <button onclick="updateVisit()">Update</button>
+  </div>
+</div>
+
+
+  <!-- Get Visits By Patient Modal -->
+  <div id="getPatientVisitsModal" class="modal">
+    <div class="modal-content">
+      <span class="close-cross" onclick="closeModal('getPatientVisitsModal')">&times;</span>
+      <h2>Get Visits By Patient</h2>
+      <input type="number" id="patientVisitId" placeholder="Patient ID">
+      <button onclick="getVisitsByPatient()">Get</button>
+    </div>
+  </div>
+
+  <!-- Visits Table -->
+  <div id="visitsList"></div>
+
+  <script>
+    const baseUrl = 'http://localhost:3001/api';
+
+    function openModal(id) { document.getElementById(id).style.display = 'block'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+    // Add visit record
+  async function addVisit() {
+  const data = {
+    appointment_id: document.getElementById('addAppointmentId').value,
+    doctor_id: document.getElementById('addDoctorId').value,
+    patient_id: document.getElementById('addPatientId').value,
+    diagnosis: document.getElementById('addDiagnosis').value,
+    symptoms: document.getElementById('addSymptoms').value || null,
+    treatment_notes: document.getElementById('addTreatmentNotes').value || null,
+    visit_date: document.getElementById('addVisitDate').value,
+    blood_pressure: document.getElementById('addBloodPressure').value || null,
+    temperature: document.getElementById('addTemperature').value || null,
+    weight: document.getElementById('addWeight').value || null,
+    time: document.getElementById('addTime').value || null
+  };
+
+  const res = await fetch(`${baseUrl}/visits`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+
+  if (res.ok) {
+    alert('Visit Added!');
+    closeModal('addModal');
+    getAllVisits();
+  } else {
+    const d = await res.json();
+    alert('Failed: ' + (d.message || 'Unknown error'));
+  }
+}
+
+
+   // Delete visit
+  async function deleteVisit(id) {
+    if(!confirm('Are you sure you want to delete this visit?')) return;
+    const res = await fetch(`${baseUrl}/visits/${id}`, { method: 'DELETE' });
+    if(res.ok) { alert('Deleted'); getAllVisits(); }
+    else { const d = await res.json(); alert('Failed: ' + (d.message || 'Unknown error')); }
+  }
+
+
+
+  async function updateVisit() {
+  const id = document.getElementById('updateVisitId').value; // use new input
+  const data = {
+    diagnosis: document.getElementById('updateDiagnosis').value,
+    symptoms: document.getElementById('updateSymptoms').value,
+    treatment_notes: document.getElementById('updateTreatment').value,
+    weight: document.getElementById('updateWeight').value || null,
+    temperature: document.getElementById('updateTemperature').value || null,
+    blood_pressure: document.getElementById('updateBP').value || null,
+    time: document.getElementById('updateTime').value || null
+  };
+
+  const res = await fetch(`${baseUrl}/visit/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+
+  if(res.ok){
+    alert('Visit Updated!');
+    closeModal('updateModal');
+    getAllVisits(); // refresh the table
+  } else {
+    const d = await res.json();
+    alert('Failed: ' + (d.message || 'Unknown error'));
+  }
+}
+
+
+    // async function getAllVisits() {
+    //   const res = await fetch(`${baseUrl}/visits`);
+    //   const data = await res.json();
+    //   const list = document.getElementById('visitsList');
+    //   list.innerHTML = '';
+    //   if(data.success){
+    //     const table = document.createElement('table');
+    //     table.innerHTML = `<tr>
+    //       <th>Visit ID</th><th>Appointment ID</th><th>Doctor ID</th><th>Patient ID</th>
+    //       <th>Visit Date</th><th>Diagnosis</th><th>Notes</th><th>Prescriptions</th>
+    //       <th>BP</th><th>Temperature</th><th>Heart Rate</th><th>Time</th>
+    //     </tr>`;
+    //     data.data.forEach(v => {
+    //       table.innerHTML += `<tr>
+    //         <td>${v[0]}</td>
+    //         <td>${v[1]}</td>
+    //         <td>${v[2]}</td>
+    //         <td>${v[3]}</td>
+    //         <td>${v[4]}</td>
+    //         <td>${v[5]}</td>
+    //         <td>${v[6]}</td>
+    //         <td>${v[7]}</td>
+    //         <td>${v[8]}</td>
+    //         <td>${v[9]}</td>
+    //         <td>${v[10]}</td>
+    //         <td>${v[11]}</td>
+    //       </tr>`;
+    //     });
+    //     list.appendChild(table);
+    //   } else {
+    //     list.textContent = 'No visit records found.';
+    //   }
+    // }
+
+    async function getAllVisits() {
+  const res = await fetch(`${baseUrl}/visits`);
+  const data = await res.json();
+  const list = document.getElementById('visitsList');
+  list.innerHTML = '';
+  if(data.success){
+    const table = document.createElement('table');
+    table.innerHTML = `<tr>
+      <th>Visit ID</th><th>Appointment ID</th><th>Doctor ID</th><th>Patient ID</th>
+      <th>Visit Date</th><th>Diagnosis</th><th>Notes</th><th>Prescriptions</th>
+      <th>BP</th><th>Temp</th><th>Heart Rate</th><th>Time</th>
+      <th>Actions</th>
+    </tr>`;
+
+    data.data.forEach(v => {
+      table.innerHTML += `<tr>
+        <td>${v[0]}</td>
+        <td>${v[1]}</td>
+        <td>${v[2]}</td>
+        <td>${v[3]}</td>
+        <td>${v[4]}</td>
+        <td>${v[5]}</td>
+        <td>${v[6]}</td>
+        <td>${v[7]}</td>
+        <td>${v[8]}</td>
+        <td>${v[9]}</td>
+        <td>${v[10]}</td>
+        <td>${v[11]}</td>
+        <td>
+    
+        <button onclick="deleteVisit(${v[0]})">Delete</button>
+        </td>
+      </tr>`;
+    });
+
+    list.appendChild(table);
+  } else {
+    list.textContent = 'No visit records found.';
+  }
+}
+
+
+    // async function getVisitById() {
+    //   const id = document.getElementById('visitId').value;
+    //   const res = await fetch(`${baseUrl}/visits/${id}`);
+    //   const data = await res.json();
+    //   const div = document.getElementById('singleVisit');
+    //   div.innerHTML = '';
+    //   if(data.success){
+    //     const v = data.data;
+    //     div.innerHTML = `<table>
+    //       <tr><th>Visit ID</th><td>${v[0]}</td></tr>
+    //       <tr><th>Appointment ID</th><td>${v[1]}</td></tr>
+    //       <tr><th>Doctor ID</th><td>${v[2]}</td></tr>
+    //       <tr><th>Patient ID</th><td>${v[3]}</td></tr>
+    //       <tr><th>Visit Date</th><td>${v[4]}</td></tr>
+    //       <tr><th>Diagnosis</th><td>${v[5]}</td></tr>
+    //       <tr><th>Notes</th><td>${v[6]}</td></tr>
+    //       <tr><th>Prescriptions</th><td>${v[7]}</td></tr>
+    //       <tr><th>BP</th><td>${v[8]}</td></tr>
+    //       <tr><th>Temperature</th><td>${v[9]}</td></tr>
+    //       <tr><th>Heart Rate</th><td>${v[10]}</td></tr>
+    //       <tr><th>Time</th><td>${v[11]}</td></tr>
+    //     </table>`;
+    //   } else { div.textContent = data.message; }
+    // }
+    async function getVisitById() {
+  const id = document.getElementById('visitId').value;
+  const res = await fetch(`${baseUrl}/visits/${id}`);
+  const data = await res.json();
+  const div = document.getElementById('singleVisit');
+  div.innerHTML = '';
+
+  if(data.success){
+    const v = data.data;
+    div.innerHTML = `<table>
+      <tr><th>Visit ID</th><td>${v[0]}</td></tr>
+      <tr><th>Appointment ID</th><td>${v[1]}</td></tr>
+      <tr><th>Doctor ID</th><td>${v[2]}</td></tr>
+      <tr><th>Patient ID</th><td>${v[3]}</td></tr>
+      <tr><th>Visit Date</th><td>${v[4]}</td></tr>
+      <tr><th>Diagnosis</th><td>${v[5]}</td></tr>
+      <tr><th>Notes</th><td>${v[6]}</td></tr>
+      <tr><th>Prescriptions</th><td>${v[7]}</td></tr>
+      <tr><th>BP</th><td>${v[8]}</td></tr>
+      <tr><th>Temperature</th><td>${v[9]}</td></tr>
+      <tr><th>Heart Rate</th><td>${v[10]}</td></tr>
+      <tr><th>Time</th><td>${v[11]}</td></tr>
+      <tr>
+        <td colspan="2">
+         <button onclick="deleteVisit(${v[0]})">Delete</button>
+        </td>
+      </tr>
+    </table>`;
+  } else { 
+    div.textContent = data.message; 
+  }
+}
+
+
+// async function getVisitsByPatient() {
+//   const patientId = document.getElementById('patientVisitId').value;
+//   const res = await fetch(`${baseUrl}/visits/patient/${patientId}`);
+//   const data = await res.json();
+//   const list = document.getElementById('visitsList');
+//   list.innerHTML = '';
+
+//   if (data.success && data.data.length > 0) {
+//     const table = document.createElement('table');
+
+//     // Only show up to diagnosis
+//     const headers = ["0", "1", "2", "3", "4"]; // adjust keys according to your API
+//     let headerRow = '<tr><th>Visit ID</th><th>Appointment ID</th><th>Doctor ID</th><th>Visit Date</th><th>Diagnosis</th></tr>';
+//     table.innerHTML = headerRow;
+
+//     data.data.forEach(record => {
+//       let row = '<tr>';
+//       headers.forEach(h => row += `<td>${record[h]}</td>`);
+//       row += '</tr>';
+//       table.innerHTML += row;
+//     });
+
+//     list.appendChild(table);
+//     closeModal('getPatientVisitsModal');
+//   } else {
+//     list.textContent = 'No visits found for this patient.';
+//   }
+// }
+async function getVisitsByPatient() {
+  const patientId = document.getElementById('patientVisitId').value;
+  const res = await fetch(`${baseUrl}/visits/patient/${patientId}`);
+  const data = await res.json();
+  const list = document.getElementById('visitsList');
+  list.innerHTML = '';
+
+  if (data.success && data.data.length > 0) {
+    const table = document.createElement('table');
+
+    // Show up to diagnosis (or adjust fields as needed)
+    const headers = ["0", "1", "2", "3", "4", "5", "6"];
+    let headerRow = '<tr><th>Visit ID</th><th>Appointment ID</th><th>Doctor ID</th><th>Patient ID</th><th>Visit Date</th><th>Diagnosis</th><th>Notes</th><th>Actions</th></tr>';
+    table.innerHTML = headerRow;
+
+    data.data.forEach(record => {
+      let row = `<tr>
+        <td>${record[0]}</td>
+        <td>${record[1]}</td>
+        <td>${record[2]}</td>
+        <td>${record[3]}</td>
+        <td>${record[4]}</td>
+        <td>${record[5]}</td>
+        <td>${record[6]}</td>
+        <td>
+           <button onclick="deleteVisit(${record[0]})">Delete</button>
+        </td>
+      </tr>`;
+      table.innerHTML += row;
+    });
+
+    list.appendChild(table);
+    closeModal('getPatientVisitsModal');
+  } else {
+    list.textContent = 'No visits found for this patient.';
+  }
+}
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <style>
+    body, html {
+      margin: 0; padding: 0;
+      font-family: Arial, sans-serif;
+      height: 100%;
+      background-color: #121212;
+      color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      background-color: #1f1f1f;
+      padding: 10px 20px;
+      box-shadow: 0 2px 5px #000;
+    }
+    header img { width: 50px; height: 50px; margin-right: 15px; }
+    header h1 { margin: 0; color: #fff; }
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      text-align: center;
+    }
+    .menu button {
+      padding: 40px;
+      font-size: 24px;
+      font-weight: bold;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      background-color: #00bfa5;
+      color: #fff;
+      width: 350px;
+      transition: transform 0.2s;
+    }
+    .menu button:hover {
+      background-color: #009e88; 
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://tse1.mm.bing.net/th/id/OIP.y9Wm3U5yHBe2-nfaphxiPwHaHV?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Hospital Logo">
+    <h1>Admin Dashboard</h1>
+  </header>
+
+  <div class="menu">
+    <button onclick="window.location.href='appointments.html'">Manage Appointments</button>
+    <button onclick="window.location.href='patients.html'">Manage Patients</button>
+    <button onclick="window.location.href='doctors.html'">Manage Doctors</button>
+    <button onclick="window.location.href='bills.html'">Manage Bills</button>
+  </div>
+</body>
+</html>

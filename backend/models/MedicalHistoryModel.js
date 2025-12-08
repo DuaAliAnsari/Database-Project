@@ -12,9 +12,9 @@ async function createMedicalHistory(data) {
           :patient_id,
           :blood_group,
           :allergies,
-          :surgeries,
-          :vaccination,
-          :family,
+          :past_surgeries_operations,
+          :vaccination_history,
+          :family_history,
           :medical_checks
         ); 
       END;
@@ -23,9 +23,9 @@ async function createMedicalHistory(data) {
         patient_id: data.patient_id,
         blood_group: data.blood_group,
         allergies: data.allergies,
-        surgeries: data.past_surgeries_operations,
-        vaccination: data.vaccination_history,
-        family: data.family_history,
+        past_surgeries_operations: data.past_surgeries_operations,
+        vaccination_history: data.vaccination_history,
+        family_history: data.family_history,
         medical_checks: data.medical_checks
       }
     );
@@ -105,9 +105,9 @@ async function updateMedicalHistory(data) {
           :patient_id,
           :blood_group,
           :allergies,
-          :surgeries,
-          :vaccination,
-          :family,
+          :past_surgeries_operations,
+          :vaccination_history,
+          :family_history,
           :medical_checks
         ); 
       END;
@@ -116,9 +116,9 @@ async function updateMedicalHistory(data) {
         patient_id: data.patient_id,
         blood_group: data.blood_group,
         allergies: data.allergies,
-        surgeries: data.past_surgeries_operations,
-        vaccination: data.vaccination_history,
-        family: data.family_history,
+        past_surgeries_operations: data.past_surgeries_operations,
+        vaccination_history: data.vaccination_history,
+        family_history: data.family_history,
         medical_checks: data.medical_checks
       }
     );

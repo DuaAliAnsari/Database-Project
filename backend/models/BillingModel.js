@@ -11,7 +11,7 @@ class BillingModel {
     const conn = await this.getConnection();
     try {
       const result = await conn.execute(
-        `SELECT billing_id, patient_id, appointment_id, walkin_id,
+        `SELECT billing_id, patient_id, appointment_id, 
                 bill_date, total_amount, tax_amount, payment_status,
                 payment_method, payment_date, bill_type
          FROM Billing
@@ -43,11 +43,11 @@ class BillingModel {
     try {
       await conn.execute(
         `INSERT INTO Billing (
-            billing_id, patient_id, appointment_id, walkin_id,
+            billing_id, patient_id, appointment_id,
             bill_date, total_amount, tax_amount, payment_status,
             payment_method, payment_date, bill_type
          ) VALUES (
-            :billing_id, :patient_id, :appointment_id, :walkin_id,
+            bill_seq.NEXTVAL, :patient_id, :appointment_id,
             TO_DATE(:bill_date, 'YYYY-MM-DD'), :total_amount, :tax_amount,
             :payment_status, :payment_method,
             TO_DATE(:payment_date, 'YYYY-MM-DD'), :bill_type

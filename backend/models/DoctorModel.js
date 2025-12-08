@@ -89,14 +89,13 @@ class DoctorModel {
           phone_number,
           email
         ) VALUES (
-          :doctor_id,
+          doctor_seq.NEXTVAL,
           :doctor_name,
           :department,
           :phone_number,
           :email
         )`,
         {
-          doctor_id: doctorData.doctor_id,
           doctor_name: doctorData.doctor_name,
           department: doctorData.department,
           phone_number: doctorData.phone_number,

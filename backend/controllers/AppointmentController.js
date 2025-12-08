@@ -90,7 +90,7 @@ class AppointmentController {
       const appointmentData = req.body;
       
       // Validation
-      if (!appointmentData.appointment_id || !appointmentData.patient_id || 
+      if ( !appointmentData.patient_id || 
           !appointmentData.doctor_id || !appointmentData.appointment_date || 
           !appointmentData.appointment_time) {
         return res.status(400).json({
@@ -274,7 +274,6 @@ class AppointmentController {
       }
 
       const result = await AppointmentModel.updateAppointmentStatus(id, status);
-      
       res.status(200).json({
         success: true,
         message: 'Appointment status updated successfully',

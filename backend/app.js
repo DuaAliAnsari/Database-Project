@@ -12,7 +12,7 @@ const medicalHistoryRoutes = require('./routes/MedicalHistoryRoutes');
 const prescriptionRoutes = require("./routes/PrescriptionRoutes");
 const billingRoutes = require("./routes/BillingRoutes");
 const visitRecordRoutes = require("./routes/VisitRecordRoutes");
-
+const authRouter = require('./routes/authRouter');
 
 
 const db = require("./config/db");
@@ -32,6 +32,7 @@ app.use("/api/medical-history", medicalHistoryRoutes);
 app.use("/api/billing", billingRoutes);
 app.use("/api/prescriptions", prescriptionRoutes);
 app.use("/api/visits", visitRecordRoutes);
+app.use('/api/auth', authRouter);
 
 
 

@@ -7,6 +7,50 @@ class PatientModel {
   async getConnection() {
     return await db.getConnection();
   }
+async createPatient(patientData) {
+  const connection = await this.getConnection();
+  try {
+    // Insert patient using sequence
+    await connection.execute(
+      `INSERT INTO PATIENTS (
+        PATIENT_ID,
+        PATIENT_NAME,
+        PHONE_NUMBER,
+        DATE_OF_BIRTH,
+        GENDER,
+        AGE
+      ) VALUES (
+        patient_seq.NEXTVAL,
+        :patient_name,
+        :phone_number,
+        TO_DATE(:date_of_birth, 'YYYY-MM-DD'),
+        :gender,
+        :age
+      )`,
+      {
+        patient_name: patientData.patient_name,
+        phone_number: patientData.phone_number,
+        date_of_birth: patientData.date_of_birth,
+        gender: patientData.gender,
+        age: patientData.age
+      },
+      { autoCommit: true }
+    );
+
+    // Get the newly generated patient_id
+    const newIdResult = await connection.execute(
+      `SELECT patient_seq.CURRVAL AS patient_id FROM dual`
+    );
+    const newPatientId = newIdResult.rows[0][0];
+
+    return { success: true, patientId: newPatientId };
+  } catch (error) {
+    throw error;
+  } finally {
+    await connection.close();
+  }
+}
+
 
   // Get all patients
   async getAllPatients() {
@@ -55,44 +99,44 @@ class PatientModel {
     }
   }
 
-  // Create new patient
-  async createPatient(patientData) {
-    const connection = await this.getConnection();
-    try {
-      await connection.execute(
-        `INSERT INTO Patients (
-          patient_id,
-          patient_name,
-          phone_number,
-          date_of_birth,
-          gender,
-          age
-        ) VALUES (
-          :patient_id,
-          :patient_name,
-          :phone_number,
-          TO_DATE(:date_of_birth, 'YYYY-MM-DD'),
-          :gender,
-          :age
-        )`,
-        {
-          patient_id: patientData.patient_id,
-          patient_name: patientData.patient_name,
-          phone_number: patientData.phone_number,
-          date_of_birth: patientData.date_of_birth,
-          gender: patientData.gender,
-          age: patientData.age
-        },
-        { autoCommit: true }
-      );
+  // // Create new patient
+  // async createPatient(patientData) {
+  //   const connection = await this.getConnection();
+  //   try {
+  //     await connection.execute(
+  //       `INSERT INTO Patients (
+  //         patient_id,
+  //         patient_name,
+  //         phone_number,
+  //         date_of_birth,
+  //         gender,
+  //         age
+  //       ) VALUES (
+  //         :patient_id,
+  //         :patient_name,
+  //         :phone_number,
+  //         TO_DATE(:date_of_birth, 'YYYY-MM-DD'),
+  //         :gender,
+  //         :age
+  //       )`,
+  //       {
+  //         patient_id: patientData.patient_id,
+  //         patient_name: patientData.patient_name,
+  //         phone_number: patientData.phone_number,
+  //         date_of_birth: patientData.date_of_birth,
+  //         gender: patientData.gender,
+  //         age: patientData.age
+  //       },
+  //       { autoCommit: true }
+  //     );
 
-      return { success: true, patientId: patientData.patient_id };
-    } catch (error) {
-      throw error;
-    } finally {
-      await connection.close();
-    }
-  }
+  //     return { success: true, patientId: patientData.patient_id };
+  //   } catch (error) {
+  //     throw error;
+  //   } finally {
+  //     await connection.close();
+  //   }
+  // }
 
   // Update patient
   async updatePatient(patientId, patientData) {

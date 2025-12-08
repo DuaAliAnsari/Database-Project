@@ -29,10 +29,10 @@ class BillingController {
     try {
       const billData = req.body;
 
-      if (!billData.billing_id || !billData.patient_id || !billData.bill_date) {
+      if ( !billData.patient_id || !billData.bill_date) {
         return res.status(400).json({
           success: false,
-          message: "billing_id, patient_id, and bill_date are required"
+          message: " patient_id, and bill_date are required"
         });
       }
 
