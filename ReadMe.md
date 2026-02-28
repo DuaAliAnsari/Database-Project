@@ -1,138 +1,91 @@
-# HR Management System – Database Systems Teaching App
+#Hospital Management System
 
-This project is a **full-stack HR Management System** designed as teaching material for a database systems course. It demonstrates how a web application interacts with a relational database (OracleDB) using a Node.js backend and a React frontend.
+**Contributors**: Dua Ali Ansari, Tahera Abidi, Maryam Binte Shahid 
+________________________________________
+**Overview**
 
----
+The Hospital Management System (HMS) is a centralized application designed to streamline patient care, appointment scheduling, medical record management, and billing in modern healthcare facilities. It provides role-based access for doctors and administrators, ensuring accurate and secure handling of patient data.
+The system addresses challenges like:
 
-## Acknowledgement
+•	Lost or incomplete patient records
 
-This project is from the following repository: [https://github.com/ShehzadAslamOza/lab7-dbms-app/tree/main](https://github.com/ShehzadAslamOza/lab7-dbms-app/tree/main)
+•	Scheduling conflicts and overbooking
 
----
+•	Delayed access to medical history and lab results
 
-## Project Structure
+•	Billing discrepancies and poor departmental coordination
+________________________________________
+**Features**
 
-```
-DB-HRApp-Main/
-│
-├── backend/      # Node.js/Express API server (connects to OracleDB)
-├── frontend/     # React web application (user interface)
-├── db-init.sql   # SQL script for database setup and sample queries
-└── README.md     # Project documentation
-```
+**Patient Management**
+•	Add, view, and search patients
 
-### Folder Responsibilities
+•	Track appointments and visit history
 
-- **backend/**  
-  Contains the Node.js/Express server, which exposes RESTful APIs for managing employees, departments, jobs, locations, and authentication.  
-  - `models/` – Database access logic for each entity (employees, departments, etc.)
-  - `controllers/` – Business logic for handling API requests
-  - `routes/` – API endpoint definitions
-  - `config/` – Database connection configuration
-  - `middlewares/` – Middleware (e.g., authentication)
-  - `postman/` – Postman collection for API testing
+•	Maintain detailed medical histories including allergies, surgeries, vaccinations, and family history
 
-- **frontend/**  
-  Contains the React application, which provides the user interface for HR management.  
-  - `src/components/` – React components for login, dashboard, employees, departments, etc.
+**Doctor Management**
 
+•	Add and update doctor information
 
+•	Schedule appointments with availability constraints
 
----
+•	View patient records and visit history
 
-## Prerequisites
+**Appointment Management**
 
-- **Node.js** (v14+ recommended)
-- **npm** (comes with Node.js)
-- **OracleDB** (local or remote instance)
-- **OracleDB Node.js driver** (installed via npm)
-- **(Optional) Oracle SQL Developer** for running SQL scripts
+•	Create, update, and cancel appointments
 
----
+•	Ensure doctors are not overbooked (max 20 per day)
 
-## Setup & Running the Application
+•	Track appointment status: Scheduled, Completed, Cancelled, No-Show
 
-### 1. Clone the Repository
+**Visit Records & Prescriptions**
 
-```sh
-git clone https://github.com/DeebajHaider/DB-HRApp-Main.git
-cd DB-HRApp-Main
-```
+•	Record visit details: symptoms, diagnosis, treatment notes, vitals
 
-### 2. Configure Backend Environment
+•	Doctors can create prescriptions with dosage, frequency, duration, and instructions
 
-- Go to the `backend/` folder.
-- Change the .env.example file into a `.env` file with your OracleDB credentials:
+**Billing**
 
-  ```
-  DB_USER=your_db_username
-  DB_PASSWORD=your_db_password
-  DB_CONNECT_STRING=your_db_connect_string
-  ```
+•	Create, update, and view bills
 
-### 3. Install Dependencies
+•	Track payment status: Paid, Pending, Overdue, Cancelled
 
-#### Backend
+•	Support multiple payment methods including cash, card, insurance, and online
 
-```sh
-cd backend
-npm install
-```
+**Authentication & Roles**
 
-#### Frontend
+•	Role-based login for doctors and administrators
 
-```sh
-cd ../frontend
-npm install
-```
+•	Secure password management and unique usernames
+________________________________________
+**Database Design**
 
-### 4. Run the Application
+•	Entities: Doctors, Patients, Medical History, Appointments, Visit Records, Prescriptions, Billing, User Authentication
 
-#### Start the Backend Server
+•	Relationships:
 
-```sh
-cd backend
-npm run start
-```
+o	One-to-many: Doctor ↔ Appointments, Patient ↔ Appointments, Patient ↔ Visit Records, Doctor ↔ Prescriptions
 
-#### Start the Frontend App
+o	One-to-one: Patient ↔ Medical History, Appointment ↔ Billing (optional), Appointment ↔ Visit Record (optional)
 
-```sh
-cd ../frontend
-npm start
-```
+•	Normalization: Database normalized to 3rd Normal Form (3NF) ensuring data integrity and eliminating redundancy
+________________________________________
+**Tech Stack**
 
-- The frontend will typically run at [http://localhost:3000](http://localhost:3000)
-- The backend API will run at [http://localhost:3001](http://localhost:3001)
+•	Frontend: HTML, CSS, JavaScript
 
----
+•	Backend & Database: SQL
+________________________________________
+**Application Flow**
 
-## Features
+1.	Login Page: Authenticates users and redirects to the relevant dashboard
 
-- **Employee Management:** View, add, edit, and delete employees.
-- **Department Management:** View, add, and edit departments.
-- **Job & Location Listings:** View available jobs and locations.
-- **Authentication:** Simple login system (expandable for real-world use).
-- **OracleDB Integration:** All data is stored and managed in OracleDB.
+2.	Admin Dashboard: Manage appointments, patients, doctors, and billing
 
----
+3.	Doctor Dashboard: Manage appointments, patients, visit records, and medical history
 
-## Educational Value
+4.	Appointment Workflow: Create → View → Update → Track status
+5.	Billing Workflow: Generate bills → Update → Check pending payments
 
-- Demonstrates full-stack CRUD operations.
-- Shows how to connect a Node.js server to OracleDB.
-- Illustrates RESTful API design and consumption from a React frontend.
-- Provides practical SQL examples for database manipulation.
-
----
-
-## Notes
-
-- This app is intended for educational purposes and may use simplified authentication and error handling.
-- For production use, always secure credentials and follow best practices for security and validation.
-
----
-
-## License
-
-This project is for educational use in database systems courses.
