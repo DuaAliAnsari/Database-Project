@@ -1,6 +1,7 @@
 **Hospital Management System**
 
 The final code is in the working_product branch.
+
 **Contributors**: Dua Ali Ansari, Tahera Abidi, Maryam Binte Shahid 
 ________________________________________
 **Overview**
