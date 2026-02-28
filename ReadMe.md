@@ -1,4 +1,4 @@
-#Hospital Management System
+**Hospital Management System**
 
 **Contributors**: Dua Ali Ansari, Tahera Abidi, Maryam Binte Shahid 
 ________________________________________
